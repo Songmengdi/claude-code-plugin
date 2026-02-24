@@ -1,0 +1,9 @@
+{
+  "name": "prompt-optimizer",
+  "version": "0.1.0",
+  "description": "根据任务执行经验优化命令、SKILL、Agent的提示词",
+  "author": {
+    "name": "User"
+  },
+  "keywords": ["prompt", "optimization", "ai", "enhancement"]
+}

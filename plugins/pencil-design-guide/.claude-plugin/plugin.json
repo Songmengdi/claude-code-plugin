@@ -1,0 +1,9 @@
+{
+  "name": "pencil-design-guide",
+  "version": "0.1.0",
+  "description": "Pencil MCP 工具使用指南，帮助正确使用 Pencil 进行 Figma 设计",
+  "author": {
+    "name": "songmengdi"
+  },
+  "keywords": ["pencil", "figma", "design", "ui", "mcp"]
+}

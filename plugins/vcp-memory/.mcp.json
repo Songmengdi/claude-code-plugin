@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "vcp-memory": {
+      "command": "node",
+      "args": [
+        "/Users/songmengdi/workspace/learn/VCPToolBox/mcp_server/dist/index.js"
+      ]
+    }
+  }
+}

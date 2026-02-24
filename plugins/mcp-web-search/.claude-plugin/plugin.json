@@ -1,0 +1,8 @@
+{
+  "name": "mcp-web-search",
+  "version": "1.0.0",
+  "description": "MCP 网络搜索插件，提供网络搜索和信息检索功能",
+  "author": {
+    "name": "Claude Code"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "name": "mcp-pencil",
+  "version": "1.0.0",
+  "description": "MCP Pencil 设计工具插件，用于与 Pencil 设计编辑器进行交互",
+  "author": {
+    "name": "Claude Code"
+  }
+}

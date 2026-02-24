@@ -1,0 +1,8 @@
+{
+  "name": "mcp-img-enhance",
+  "version": "1.0.0",
+  "description": "MCP 图像增强服务插件，提供图像分析和处理功能",
+  "author": {
+    "name": "Claude Code"
+  }
+}

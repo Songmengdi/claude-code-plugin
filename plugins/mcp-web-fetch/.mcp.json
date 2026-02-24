@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "web-fetch": {
+      "command": "node",
+      "args": [
+        "/Users/songmengdi/workspace/mcp_service/zcaceres_fetch-mcp/dist/index.js"
+      ]
+    }
+  }
+}

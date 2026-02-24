@@ -1,0 +1,8 @@
+{
+  "name": "mcp-excalidraw",
+  "version": "1.0.0",
+  "description": "MCP Excalidraw 集成插件，用于与 Excalidraw 白板服务进行交互",
+  "author": {
+    "name": "Claude Code"
+  }
+}

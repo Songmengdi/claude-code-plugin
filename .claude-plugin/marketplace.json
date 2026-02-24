@@ -1,0 +1,53 @@
+{
+  "name": "smd-plugin-marketplace",
+  "owner": {
+    "name": "Song Md"
+  },
+  "plugins": [
+    {
+      "name": "pencil-design-guide",
+      "source": "./plugins/pencil-design-guide",
+      "description": "使用Pencil完成精细化ui设计"
+    },
+    {
+      "name": "prompt-optimizer",
+      "source": "./plugins/prompt-optimizer",
+      "description": "基于任务执行经验优化命令、SKILL、Agent的提示词，让提示词在后续使用中更好地辅助完成工作。"
+    },
+    {
+      "name": "mcp-excalidraw",
+      "source": "./plugins/mcp-excalidraw",
+      "description": "MCP Excalidraw 集成插件，用于与 Excalidraw 白板服务进行交互"
+    },
+    {
+      "name": "mcp-img-enhance",
+      "source": "./plugins/mcp-img-enhance",
+      "description": "MCP 图像增强服务插件，提供图像分析和处理功能"
+    },
+    {
+      "name": "mcp-pencil",
+      "source": "./plugins/mcp-pencil",
+      "description": "MCP Pencil 设计工具插件，用于与 Pencil 设计编辑器进行交互"
+    },
+    {
+      "name": "mcp-web-search",
+      "source": "./plugins/mcp-web-search",
+      "description": "MCP 网络搜索插件，提供网络搜索和信息检索功能"
+    },
+    {
+      "name": "mcp-web-fetch",
+      "source": "./plugins/mcp-web-fetch",
+      "description": "MCP Web Fetch 插件，提供网页内容获取功能"
+    },
+    {
+      "name": "vcp-memory",
+      "source": "./plugins/vcp-memory",
+      "description": "vcp-memory 插件，记忆功能"
+    },
+    {
+      "name": "github-browser",
+      "source": "./plugins/github-browser",
+      "description": "探索github代码"
+    }
+  ]
+}
