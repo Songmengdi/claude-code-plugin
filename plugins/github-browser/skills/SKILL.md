@@ -1,83 +1,59 @@
 ---
 name: github-browser
-description: This skill should be used when the user asks to "browse GitHub", "view GitHub code", "search GitHub repositories", "explore GitHub projects", "explore codebase", or wants to access/analyze code from GitHub repositories using the browser automation tool.
+description: This skill should be used when the user asks to "browse GitHub", "view GitHub code", "explore GitHub projects", "clone GitHub repository", or wants to access/analyze code from GitHub repositories using local git clone and file system tools.
 ---
 
 # GitHub Browser
 
-探索 GitHub 代码库的核心工具。
+使用 git clone 将 GitHub 代码库克隆到本地，然后用本地文件系统工具进行高效探索。
 
-## 核心脚本
+## 核心工作流
 
-### 1. get-info.py - 仓库概览
+### 1. 克隆仓库
 
-获取仓库的基本信息、依赖配置、语言统计等。
-
-```bash
-./scripts/get-info.py <owner> <repo>
-```
-
-**输出内容：**
-- 基本信息：名称、描述、Stars、Forks、默认分支
-- README 预览
-- 主要文件检测
-- 依赖信息（package.json/requirements.txt 等）
-- 语言分布
-- 最近提交
-
-**示例：**
-```bash
-./scripts/get-info.py supermemoryai opencode-supermemory
-```
-
-### 2. get-tree.py - 目录结构
-
-获取目录树结构，支持递归展开子目录。
+使用 git clone 将 GitHub 仓库克隆到本地临时目录：
 
 ```bash
-./scripts/get-tree.py <owner> <repo> <depth> [path]
+# 克隆仓库到临时目录（只克隆最新提交，速度快）
+git clone --depth 1 https://github.com/<owner>/<repo>.git /tmp/github-browser-<repo>
 ```
 
-**参数说明：**
-- `owner` - GitHub 仓库所有者
-- `repo` - 仓库名称
-- `depth` - 目录树深度（推荐 2-3）
-- `path` - 可选，指定起始路径（如 `src`）
+使用 `--depth 1` 只克隆最新提交，文件完整但无历史记录，显著提升速度。
 
-**示例：**
-```bash
-# 获取根目录 2 层
-./scripts/get-tree.py supermemoryai opencode-supermemory 2
+### 2. 探索目录结构
 
-# 获取 src 目录 3 层
-./scripts/get-tree.py supermemoryai opencode-supermemory 3 src
+使用 Glob 工具获取目录结构：
+
+```
+# 获取根目录文件和目录
+Glob: pattern="*" in /tmp/github-browser-<repo>
+
+# 获取特定目录（如 src）
+Glob: pattern="**/*" in /tmp/github-browser-<repo>/src
 ```
 
-**输出格式：**
-```
-├── src/
-│   ├── services/
-│   ├── types/
-│   ├── cli.ts
-│   ├── config.ts
-│   └── index.ts
-└── package.json
-```
+### 3. 搜索关键内容
 
-### 3. get-file.sh - 获取单个文件
+使用 Grep 工具搜索代码内容：
 
-```bash
-./scripts/get-file.sh <owner> <repo> <file-path> [branch]
+```
+# 搜索关键词
+Grep: pattern="function main" in /tmp/github-browser-<repo>
+
+# 按文件类型搜索
+Grep: pattern="TODO" type="js" in /tmp/github-browser-<repo>
 ```
 
-**说明：**
-- 文件 ≤300 行：直接打印到控制台
-- 文件 >300 行：保存到 `/tmp/` 并显示文件信息
+### 4. 读取文件内容
 
-**示例：**
-```bash
-./scripts/get-file.sh supermemoryai opencode-supermemory src/index.ts
-./scripts/get-file.sh supermemoryai opencode-supermemory package.json
+使用 Read 工具读取具体文件：
+
+```
+# 读取配置文件
+Read: /tmp/github-browser-<repo>/package.json
+
+# 读取源码文件
+Read: /tmp/github-browser-<repo>/src/index.ts
 ```
 
 ## 探索代码库工作流
@@ -85,53 +61,60 @@ description: This skill should be used when the user asks to "browse GitHub", "v
 ### 标准流程
 
 ```bash
-# 1. 获取仓库概览
-./scripts/get-info.py <owner> <repo>
+# 1. 克隆仓库
+git clone --depth 1 https://github.com/<owner>/<repo>.git /tmp/github-browser-<repo>
 
-# 2. 查看目录结构（2-3层）
-./scripts/get-tree.py <owner> <repo> 2
+# 2. 查看根目录结构（使用 Glob）
+# 找到主要目录：src/, lib/, tests/, etc.
 
-# 3. 根据需要深入特定目录
-./scripts/get-tree.py <owner> <repo> 3 src
+# 3. 读取关键配置文件（使用 Read）
+# package.json, requirements.txt, Cargo.toml, go.mod, etc.
 
-# 4. 获取关键文件内容
-./scripts/get-file.sh <owner> <repo> src/index.ts
-./scripts/get-file.sh <owner> <repo> package.json
+# 4. 深入主要代码目录
+# 使用 Glob 查看目录结构
+
+# 5. 搜索特定功能或模式
+# 使用 Grep 搜索代码
+
+# 6. 读取关键文件进行深入分析
+
+# 7. 完成后清理
+rm -rf /tmp/github-browser-<repo>
 ```
 
-### 示例：探索 OpenCode 插件
+### 示例：探索 React 项目
 
 ```bash
-# 1. 获取插件仓库信息
-./scripts/get-info.py supermemoryai opencode-supermemory
+# 1. 克隆仓库
+git clone --depth 1 https://github.com/facebook/react.git /tmp/github-browser-react
 
-# 2. 查看目录结构
-./scripts/get-tree.py supermemoryai opencode-supermemory 2
+# 2. 查看根目录结构
+# Glob: "*" in /tmp/github-browser-react
 
-# 3. 进入 src 目录查看
-./scripts/get-tree.py supermemoryai opencode-supermemory 3 src
+# 3. 读取 package.json 了解项目结构
+# Read: /tmp/github-browser-react/package.json
 
-# 4. 读取主要入口文件
-./scripts/get-file.sh supermemoryai opencode-supermemory src/index.ts
+# 4. 进入 packages 目录
+# Glob: "*/" in /tmp/github-browser-react/packages
 
-# 5. 查看 package.json 了解依赖
-./scripts/get-file.sh supermemoryai opencode-supermemory package.json
+# 5. 搜索核心组件
+# Grep: "export function" type="ts" in /tmp/github-browser-react/packages/react
+
+# 6. 清理
+rm -rf /tmp/github-browser-react
 ```
-
-## 降级方案
-
-当脚本工具不可用时，参考 **`references/agent-browser.md`** 使用 agent-browser 直接操作。
 
 ## Additional Resources
 
-### Reference Files
+### 本地工具参考
 
-- **`references/agent-browser.md`** - agent-browser 直接操作指南（降级方案）
+| 工具 | 用途 | 示例 |
+|------|------|------|
+| `Bash` | 执行 git clone | `git clone --depth 1 <url>` |
+| `Glob` | 查找文件和目录 | `pattern="**/*.ts"` |
+| `Grep` | 搜索代码内容 | `pattern="TODO" type="js"` |
+| `Read` | 读取文件内容 | 读取配置或源码 |
 
-### Scripts 目录
+### 目录命名规范
 
-| 脚本 | 用途 |
-|-------|-------|
-| `get-info.py` | 仓库完整信息 |
-| `get-tree.py` | 目录树结构 |
-| `get-file.sh` | 获取单个文件 |
+临时目录统一使用前缀 `/tmp/github-browser-<repo>`，便于识别和清理。
