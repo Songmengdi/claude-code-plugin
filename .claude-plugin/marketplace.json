@@ -48,6 +48,11 @@
       "name": "github-browser",
       "source": "./plugins/github-browser",
       "description": "探索github代码"
+    },
+    {
+      "name": "supercode",
+      "source": "./plugins/supercode",
+      "description": "代码编写套件"
     }
   ]
 }
