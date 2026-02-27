@@ -17,6 +17,7 @@ description: "You MUST use this before any creative work - creating features, bu
 
 你必须将以下的步骤加入到你的任务清单中并按顺序完成：
 
+0. **加载功能上下文（新会话）** — 加载现有功能的文档和历史变更
 1. **并行探索项目上下文** — 同时启动 docs-explorer agent 与 code-explorer agents
 2. **阅读核心文件** — 综合文档与代码 agent 识别的关键文件
 3. **提出澄清性问题** — 每次一个问题，优先多选题
@@ -27,18 +28,37 @@ description: "You MUST use this before any creative work - creating features, bu
 
 ## 过程
 
+### 阶段 0：加载功能上下文（新会话）
+
+**目标：** 在新会话中快速了解现有功能的状态和历史变更
+
+**行动：**
+
+如果用户说明要改的功能或提供文档路径：
+
+**使用 Task 工具调用 feature-context-loader agent：**
+```
+Task({
+  subagent_type: "feature-context-loader",
+  prompt: "加载功能上下文：[功能描述或文档路径]"
+})
+```
+
+**展示 agent 返回的 Markdown Table 格式上下文摘要**，并确认：
+- 上下文是否正确？
+- 是否需要加载其他功能？
+- 这是新功能还是现有功能的变更？
+
 ### 阶段 1：并行探索项目上下文
 
 **目标：** 在早期同时获取文档视角与代码视角，避免单一信息源导致的误判
 
 **行动：**
 - 并行启动：
-  - **docs-explorer agent**（`Information/2026_02_Ai代码开发/supercode/agents/docs-explorer.md`）
-    - 任务：根据用户需求，阅读 `docs/` 目录中相关文档
+  - **docs-explorer agent**    - 任务：根据用户需求，阅读 `docs/` 目录中相关文档
     - 输出：项目规则、业务约束、不能修改的区域、关键决策、已有模式
     - 优先阅读：`invariants.md`、`do_not_touch.md`、`first_30_minutes.md`、与需求相关的业务文档
-  - **2–3 个 code-explorer agents**（`Information/2026_02_Ai代码开发/supercode/agents/code-explorer.md`）
-    - 任务：探索代码结构、实现模式、技术细节
+  - **2–3 个 code-explorer agents**    - 任务：探索代码结构、实现模式、技术细节
     - 输出：核心文件列表、架构理解、代码模式
 - 两类 agent **相互独立工作**，不得假设对方的结论
 - 允许结论存在冲突或不一致，留待后续澄清阶段处理
@@ -54,7 +74,7 @@ description: "You MUST use this before any creative work - creating features, bu
 **目标：** 设计具有不同权衡的多种实施方案
 
 **行动：**
-- 并行启动 2-3 个 code-architect agents（`Information/2026_02_Ai代码开发/supercode/agents/code-architect.md`），每个专注于不同方面：
+- 并行启动 2-3 个 code-architect agents，每个专注于不同方面：
   - **minimal changes**：最小变更，最大复用现有代码
   - **clean architecture**：可维护性、优雅抽象
   - **pragmatic balance**：速度 + 质量
@@ -83,5 +103,24 @@ description: "You MUST use this before any creative work - creating features, bu
 
 **行动：**
 - 将验证后的设计写入 `docs/plans/YYYY-MM-DD-<topic>-design.md` 并提交
+- 设计文档必须包含 frontmatter：
+
+```markdown
+---
+tags: [功能标签1, 功能标签2, feature-id]
+related:
+  - design: docs/plans/YYYY-MM-DD-xxx-v1-design.md  # 如有历史版本
+  - plan: docs/plans/YYYY-MM-DD-xxx-v1-plan.md     # 如有历史版本
+status: design  # design | implemented | completed
+---
+
+# [功能名称] 设计
+
+> **参考:** 此设计将用于生成实施计划（见对应的 plan 文档）
+
+## 概述
+[设计内容...]
+```
+
 - 提交信息：`docs: add design for <topic>`
 - 调用 writing-plans 技能创建详细的实施计划

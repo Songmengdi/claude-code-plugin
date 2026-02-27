@@ -22,9 +22,9 @@ description: 当你有规范或多步骤任务的需求时,在接触代码之前
 你必须将以下的步骤加入到你的任务清单中并按顺序完成：
 
 1. **读取设计文档** — 理解已批准的设计
-2. **并行架构设计** — 启动 2-3 个 code-architect agents，提供详细实施蓝图
+2. **并行架构设计** — 启动 2-3 个 supercode:code-architect agents，提供详细实施蓝图
 3. **整合实施蓝图** — 选择最佳方案，创建详细的任务分解
-4. **并行代码审查计划** — 启动 3 个 code-reviewer agents，从不同维度审查计划
+4. **并行代码审查计划** — 启动 3 个 supercode:code-reviewer agents，从不同维度审查计划
 5. **修复关键问题** — 修复高置信度问题
 6. **保存实施计划** — 保存到 `docs/plans/YYYY-MM-DD-<feature-name>-plan.md`
 7. **提供执行选项** — 1. 审查计划  2. 直接执行
@@ -65,7 +65,7 @@ digraph writing-plans {
 
 **目标：** 创建详细的实施蓝图
 
-**并行启动 2-3 个 code-architect agents**（在 `Information/2026_02_Ai代码开发/supercode/agents/code-architect.md`），每个专注于不同方面：
+**并行启动 2-3 个 supercode:code-architect agents**，每个专注于不同方面：
 - **minimal implementation**：最小改动，最快实现
 - **clean implementation**：代码质量、可维护性、测试完整性
 - **pragmatic balance**：速度 + 质量的平衡
@@ -91,6 +91,14 @@ digraph writing-plans {
 **每个计划必须以这个头部开始：**
 
 ```markdown
+---
+tags: [功能标签1, 功能标签2, feature-id]
+related:
+  - design: docs/plans/YYYY-MM-DD-<feature-name>-design.md
+  - plan: docs/plans/YYYY-MM-DD-xxx-v1-plan.md  # 如有历史版本
+status: plan  # plan | executed | completed
+---
+
 # [功能名称] 实施计划
 
 > **给 Claude:** 必需子技能:使用 superpowers:executing-plans 逐任务实施此计划。
@@ -155,7 +163,7 @@ git commit -m "feat: add specific feature"
 
 **目标：** 从不同维度审查计划质量
 
-**并行启动 3 个 code-reviewer agents**（在 `Information/2026_02_Ai代码开发/supercode/agents/code-reviewer.md`），专注于不同方面：
+**并行启动 3 个 code-reviewer agents** 专注于不同方面：
 - **implementation feasibility**：实施的可行性、完整性、可执行性
 - **code quality & patterns**：代码质量、遵循项目约定、测试完整性
 - **architecture & design**：架构一致性、设计模式、可维护性
@@ -192,37 +200,10 @@ git commit -m "feat: add specific feature"
 ```
 计划完成并保存到 `docs/plans/YYYY-MM-DD-<topic>-plan.md`。
 
-接下来你想要做什么？
-
-1. 审查计划 — 在新会话中审查计划的可行性和完整性
-2. 直接执行 — 在新会话中直接执行计划
-
-选择哪个选项？
-```
-
-**选项 1：审查计划**
-
-```
-你应该结束本次会话，开启新的会话，并复制以下命令到新的会话窗口：
-
-/check-plan docs/plans/YYYY-MM-DD-<topic>-design.md docs/plans/YYYY-MM-DD-<topic>-plan.md
-```
-
-**选项 2：直接执行**
-
-```
 你应该结束本次会话，开启新的会话，并复制以下命令到新的会话窗口：
 
 /execute-plan docs/plans/YYYY-MM-DD-<topic>-plan.md
 ```
-
-**说明：**
-- **审查计划**：适用于复杂功能、首次使用、或需要确保计划质量的情况
-- **直接执行**：适用于简单功能、已熟悉流程、或计划已经过验证的情况
-
-**推荐：**
-- 对于复杂功能（3个以上任务、涉及多个组件），推荐选择 1. 审查计划
-- 对于简单功能，可以直接选择 2. 直接执行
 
 ## 关键原则
 

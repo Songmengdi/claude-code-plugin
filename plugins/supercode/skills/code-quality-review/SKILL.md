@@ -79,7 +79,7 @@ npm test / cargo test / pytest / go test ./...
 
 **目标：** 从不同维度全面审查代码质量
 
-**并行启动 3 个 code-reviewer agents**（在 `Information/2026_02_Ai代码开发/supercode/agents/code-reviewer.md`），每个专注于不同方面：
+**并行启动 3 个 code-reviewer agents**，每个专注于不同方面：
 
 1. **code quality & elegance**：
    - 代码简洁性（simplicity）

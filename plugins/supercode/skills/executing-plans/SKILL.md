@@ -60,7 +60,32 @@ npm test / cargo test / pytest / go test ./...
 
 **如果测试通过：** 继续到步骤 5.2
 
-**步骤 5.2：确定基础分支**
+**步骤 5.2：更新相关文档状态**
+
+更新对应的 design 和 plan 文档的 frontmatter：
+- 将 `status` 从 `design`/`plan` 更新为 `implemented`
+- 如果本次是变更，在 design 文档末尾添加变更记录：
+
+```markdown
+---
+
+## 变更历史
+
+| 日期 | 变更描述 | Plan 文档 |
+|------|----------|-----------|
+| YYYY-MM-DD | [变更描述] | docs/plans/YYYY-MM-DD-xxx-plan.md |
+| YYYY-MM-DD | [历史变更] | docs/plans/YYYY-MM-DD-xxx-v1-plan.md |
+```
+
+提交文档更新：
+```bash
+git add docs/plans/YYYY-MM-DD-xxx-*.md
+git commit -m "docs: update feature status to implemented"
+```
+
+**如果测试通过：** 继续到步骤 5.3
+
+**步骤 5.3：确定基础分支**
 
 ```bash
 # 获取当前feature分支从哪个分支分出
@@ -72,7 +97,7 @@ git merge-base HEAD main 2>/dev/null && echo "main" || git merge-base HEAD maste
 
 确认基础分支名称。
 
-**步骤 5.3：合并到基础分支**
+**步骤 5.4：合并到基础分支**
 
 ```bash
 # 切换到基础分支
@@ -94,7 +119,7 @@ npm test / cargo test / pytest / go test ./...
 
 **如果合并后测试通过：**
 
-**步骤 5.4：清理分支**
+**步骤 5.5：清理分支**
 
 ```bash
 # 删除已合并的feature分支
