@@ -24,7 +24,7 @@ cp -r plugins/github-browser ~/.claude/plugins/
 
 ## 配置自动清理
 
-克隆的仓库默认保存在 `/tmp/github-browser-*` 目录。为了在 session 结束时自动清理这些目录，需要配置 hook。
+克隆的仓库默认保存在系统临时目录（`/tmp` 或 `$TEMP`）下的 `github-browser-*` 子目录。为了在 session 结束时自动清理，需要配置 hook。
 
 ### 方法一：项目级配置
 
@@ -39,7 +39,7 @@ cp -r plugins/github-browser ~/.claude/plugins/
         "hooks": [
           {
             "type": "command",
-            "command": "rm -rf /tmp/github-browser-*"
+            "command": "rm -rf \"${TMPDIR:-${TEMP:-${TMP:-/tmp}}}\"/github-browser-*"
           }
         ]
       }
@@ -64,11 +64,21 @@ cp -r plugins/github-browser ~/.claude/plugins/
 
 ```bash
 # 查看当前克隆的仓库
-ls -la /tmp/github-browser-*
+ls -la "${TMPDIR:-${TEMP:-${TMP:-/tmp}}}/github-browser-"*
 
 # 清理所有
-rm -rf /tmp/github-browser-*
+rm -rf "${TMPDIR:-${TEMP:-${TMP:-/tmp}}}/github-browser-"*
 ```
+
+## 跨平台兼容
+
+插件自动适配不同操作系统的临时目录：
+
+| 平台 | 环境变量 | 默认路径 |
+|------|----------|----------|
+| macOS | `$TMPDIR` | `/var/folders/...` |
+| Linux | `$TMPDIR` | `/tmp` |
+| Windows (Git Bash) | `$TEMP` / `$TMP` | `C:\Users\...\AppData\Local\Temp` |
 
 ## 使用方式
 

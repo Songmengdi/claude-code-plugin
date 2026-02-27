@@ -17,15 +17,21 @@ description: This skill should be used when the user asks to "browse GitHub", "v
 
 ### 仓库目录规范
 
-所有克隆的仓库统一存放在 `/tmp/github-browser-<owner>-<repo>`
+所有克隆的仓库统一存放在临时目录下的 `github-browser-<owner>-<repo>` 子目录。
+
+**跨平台临时目录**：
+- macOS/Linux: `/tmp` 或 `$TMPDIR`
+- Windows (Git Bash/WSL): `$TEMP` 或 `$TMP`
 
 ## 核心工作流
 
 ### 1. 检查并克隆仓库（第一步必须执行）
 
 ```bash
-# 定义仓库路径
-REPO_PATH="/tmp/github-browser-<owner>-<repo>"
+# 获取跨平台临时目录
+TMP_DIR="${TMPDIR:-${TEMP:-${TMP:-/tmp}}}"
+REPO_NAME="github-browser-<owner>-<repo>"
+REPO_PATH="$TMP_DIR/$REPO_NAME"
 
 # 先检查是否已存在
 if [ -d "$REPO_PATH" ]; then
@@ -40,14 +46,14 @@ fi
 
 ### 2. 探索目录结构
 
-使用 Glob 工具获取目录结构：
+使用 Glob 工具获取目录结构（将 `$TMP_DIR` 替换为实际路径）：
 
 ```
 # 获取根目录文件和目录
-Glob: pattern="*" in /tmp/github-browser-<owner>-<repo>
+Glob: pattern="*" in $TMP_DIR/github-browser-<owner>-<repo>
 
 # 获取特定目录（如 src）
-Glob: pattern="**/*" in /tmp/github-browser-<owner>-<repo>/src
+Glob: pattern="**/*" in $TMP_DIR/github-browser-<owner>-<repo>/src
 ```
 
 ### 3. 搜索关键内容
@@ -56,10 +62,10 @@ Glob: pattern="**/*" in /tmp/github-browser-<owner>-<repo>/src
 
 ```
 # 搜索关键词
-Grep: pattern="function main" in /tmp/github-browser-<owner>-<repo>
+Grep: pattern="function main" in $TMP_DIR/github-browser-<owner>-<repo>
 
 # 按文件类型搜索
-Grep: pattern="TODO" type="js" in /tmp/github-browser-<owner>-<repo>
+Grep: pattern="TODO" type="js" in $TMP_DIR/github-browser-<owner>-<repo>
 ```
 
 ### 4. 读取文件内容
@@ -68,10 +74,10 @@ Grep: pattern="TODO" type="js" in /tmp/github-browser-<owner>-<repo>
 
 ```
 # 读取配置文件
-Read: /tmp/github-browser-<owner>-<repo>/package.json
+Read: $TMP_DIR/github-browser-<owner>-<repo>/package.json
 
 # 读取源码文件
-Read: /tmp/github-browser-<owner>-<repo>/src/index.ts
+Read: $TMP_DIR/github-browser-<owner>-<repo>/src/index.ts
 ```
 
 ## 仓库清理策略
@@ -95,11 +101,14 @@ Read: /tmp/github-browser-<owner>-<repo>/src/index.ts
 当用户要求清理时执行：
 
 ```bash
+# 获取临时目录
+TMP_DIR="${TMPDIR:-${TEMP:-${TMP:-/tmp}}}"
+
 # 清理特定仓库
-rm -rf /tmp/github-browser-<owner>-<repo>
+rm -rf "$TMP_DIR/github-browser-<owner>-<repo>"
 
 # 清理所有 github-browser 仓库
-rm -rf /tmp/github-browser-*
+rm -rf "$TMP_DIR"/github-browser-*
 ```
 
 ## 探索代码库完整工作流
@@ -108,7 +117,8 @@ rm -rf /tmp/github-browser-*
 
 ```bash
 # 1. 检查并克隆仓库
-REPO_PATH="/tmp/github-browser-<owner>-<repo>"
+TMP_DIR="${TMPDIR:-${TEMP:-${TMP:-/tmp}}}"
+REPO_PATH="$TMP_DIR/github-browser-<owner>-<repo>"
 if [ ! -d "$REPO_PATH" ]; then
   git clone --depth 1 https://github.com/<owner>/<repo>.git "$REPO_PATH"
 fi
@@ -134,22 +144,23 @@ fi
 
 ```bash
 # 1. 检查并克隆
-REPO_PATH="/tmp/github-browser-facebook-react"
+TMP_DIR="${TMPDIR:-${TEMP:-${TMP:-/tmp}}}"
+REPO_PATH="$TMP_DIR/github-browser-facebook-react"
 if [ ! -d "$REPO_PATH" ]; then
   git clone --depth 1 https://github.com/facebook/react.git "$REPO_PATH"
 fi
 
 # 2. 查看根目录结构
-# Glob: "*" in /tmp/github-browser-facebook-react
+# Glob: "*" in $REPO_PATH
 
 # 3. 读取 package.json 了解项目结构
-# Read: /tmp/github-browser-facebook-react/package.json
+# Read: $REPO_PATH/package.json
 
 # 4. 进入 packages 目录
-# Glob: "*/" in /tmp/github-browser-facebook-react/packages
+# Glob: "*/" in $REPO_PATH/packages
 
 # 5. 搜索核心组件
-# Grep: "export function" type="ts" in /tmp/github-browser-facebook-react/packages/react
+# Grep: "export function" type="ts" in $REPO_PATH/packages/react
 
 # 仓库保留，不删除
 ```
@@ -165,12 +176,15 @@ fi
 | `Grep` | 搜索代码内容 | `pattern="TODO" type="js"` |
 | `Read` | 读取文件内容 | 读取配置或源码 |
 
-### 目录命名规范
+### 跨平台临时目录
 
-临时目录统一使用前缀 `/tmp/github-browser-<owner>-<repo>`，便于：
-- 识别来源
-- 批量清理
-- 避免命名冲突
+| 平台 | 环境变量 | 默认路径 |
+|------|----------|----------|
+| macOS | `$TMPDIR` | `/var/folders/...` |
+| Linux | `$TMPDIR` | `/tmp` |
+| Windows (Git Bash) | `$TEMP` / `$TMP` | `C:\Users\...\AppData\Local\Temp` |
+
+使用 `${TMPDIR:-${TEMP:-${TMP:-/tmp}}}` 可自动适配所有平台。
 
 ### 常见问题
 
@@ -182,5 +196,9 @@ A: 仅当用户明确要求，或 session 结束时通过 hook 自动清理。
 
 **Q: 如何查看当前有哪些克隆的仓库？**
 ```bash
-ls -la /tmp/github-browser-*
+TMP_DIR="${TMPDIR:-${TEMP:-${TMP:-/tmp}}}"
+ls -la "$TMP_DIR"/github-browser-*
 ```
+
+**Q: Windows 上找不到 /tmp 目录？**
+A: 使用跨平台临时目录变量 `$TMP_DIR`，脚本会自动检测正确的临时目录。

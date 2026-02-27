@@ -62,7 +62,7 @@ Claude Code 插件集合，扩展 Claude Code 的能力。
         "hooks": [
           {
             "type": "command",
-            "command": "rm -rf /tmp/github-browser-*"
+            "command": "rm -rf \"${TMPDIR:-${TEMP:-${TMP:-/tmp}}}\"/github-browser-*"
           }
         ]
       }
