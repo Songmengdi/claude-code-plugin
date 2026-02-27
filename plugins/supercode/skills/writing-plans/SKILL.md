@@ -70,7 +70,9 @@ digraph writing-plans {
 - **clean implementation**：代码质量、可维护性、测试完整性
 - **pragmatic balance**：速度 + 质量的平衡
 
-**向每个 code-architect agent 提供设计文档的完整内容**，要求：
+**向每个 agent 提供设计文档路径**：`docs/plans/YYYY-MM-DD-<feature-name>-design.md`
+
+让 agent 自己读取设计文档内容，要求：
 - 基于设计文档，创建详细的实施蓝图
 - 指定每个要创建或修改的文件、组件职责、集成点和数据流
 - 将实现分解为清晰的阶段，每个阶段包含具体任务
@@ -116,61 +118,114 @@ status: plan  # plan | executed | completed
 
 #### 任务结构
 
-**每个步骤是一个动作（2-5 分钟）：**
+**每个任务是一个完整的、不破坏代码的最小功能变更（5-15 分钟）：**
+
+**动作设计原则：**
+1. **完整性**：一个动作包含实现某个最小功能所需的所有变更（类型声明、函数实现、测试等），是一个完整的单元
+2. **原子性**：每个动作实现后代码处于可工作状态，不破坏现有功能
+3. **最小变更**：一个动作对应一个最小的功能点或前置准备，不要过度拆分
+4. **多文件支持**：一个动作可能涉及多个文件的修改
 
 ````markdown
-### 任务 N: [组件名称]
+### 任务 N: [最小功能描述，如：添加用户认证功能]
 
-**文件:**
-- 创建: `exact/path/to/file.py`
-- 修改: `exact/path/to/existing.py:123-145`
-- 测试: `tests/exact/path/to/test.py`
+**变更文件：**
+- 创建: `src/auth/user-auth.ts`
+- 创建: `tests/auth/user-auth.test.ts`
+- 修改: `src/api/router.ts:45-52`  # 集成认证路由
 
-**步骤 1: 编写失败的测试**
+**实现：**
 
-```python
-def test_specific_behavior():
-    result = function(input)
-    assert result == expected
+类型定义 (`src/auth/user-auth.ts`):
+```typescript
+export interface UserCredentials {
+  username: string;
+  password: string;
+}
+
+export interface AuthResult {
+  success: boolean;
+  token?: string;
+  error?: string;
+}
 ```
 
-**步骤 2: 运行测试以验证它失败**
-
-运行: `pytest tests/path/test.py::test_name -v`
-预期: FAIL,显示 "function not defined"
-
-**步骤 3: 编写最小实现**
-
-```python
-def function(input):
-    return expected
+认证函数 (`src/auth/user-auth.ts`):
+```typescript
+export async function authenticateUser(
+  credentials: UserCredentials
+): Promise<AuthResult> {
+  if (!credentials.username || !credentials.password) {
+    return { success: false, error: 'Invalid credentials' };
+  }
+  // TODO: 实际验证逻辑
+  return { success: true, token: 'mock-token' };
+}
 ```
 
-**步骤 4: 运行测试以验证它通过**
+路由集成 (`src/api/router.ts:45-52`):
+```typescript
+import { authenticateUser, UserCredentials } from '../auth/user-auth';
 
-运行: `pytest tests/path/test.py::test_name -v`
+router.post('/auth/login', async (ctx) => {
+  const credentials: UserCredentials = ctx.request.body;
+  const result = await authenticateUser(credentials);
+  ctx.body = result;
+});
+```
+
+测试 (`tests/auth/user-auth.test.ts`):
+```typescript
+import { authenticateUser } from '../../src/auth/user-auth';
+
+test('valid credentials return success', async () => {
+  const result = await authenticateUser({
+    username: 'test',
+    password: 'password'
+  });
+  expect(result.success).toBe(true);
+});
+```
+
+**验证：**
+运行: `pnpm test tests/auth/user-auth.test.ts`
 预期: PASS
 
-**步骤 5: 提交**
-
+**提交：**
 ```bash
-git add tests/path/test.py src/path/file.py
-git commit -m "feat: add specific feature"
+git add src/auth/user-auth.ts src/api/router.ts tests/auth/user-auth.test.ts
+git commit -m "feat: add user authentication with username/password"
 ```
 ````
+
+**示例：正确的动作划分**
+
+✅ **正确的动作**（一个任务内）：
+- 添加完整的用户认证功能（类型 + 实现 + 路由集成 + 测试）
+- 重构函数签名并更新所有调用点（类型声明 + 所有调用处修改）
+- 添加缓存层并集成到现有服务（缓存实现 + 服务修改 + 测试）
+
+❌ **错误的拆分**（不要这样分多个任务）：
+- 任务1：添加类型定义
+- 任务2：添加函数实现
+- 任务3：编写测试
+- 任务4：集成到路由
+- 任务5：运行测试
+
+**注意：** 对于简单的小变更，保持为单个任务；只有当变更确实独立且可分割时才拆分为多个任务。
 
 ### 阶段 4：并行代码审查计划
 
 **目标：** 从不同维度审查计划质量
 
-**并行启动 3 个 code-reviewer agents** 专注于不同方面：
-- **implementation feasibility**：实施的可行性、完整性、可执行性
-- **code quality & patterns**：代码质量、遵循项目约定、测试完整性
-- **architecture & design**：架构一致性、设计模式、可维护性
+**并行启动 3 个 code-reviewer agents**，每个提供不同的审查重点：
+- **agent 1 (implementation feasibility)**：审查实施的可行性、完整性、可执行性
+- **agent 2 (code quality & patterns)**：审查代码质量、遵循项目约定、测试完整性
+- **agent 3 (architecture & design)**：审查架构一致性、设计模式、可维护性
 
-**向每个 code-reviewer agent 提供实施计划的完整内容**，要求：
-- 审查实施计划的各个方面
-- 识别可能的问题、遗漏、不合理的设计
+**向每个 agent 提供计划文档路径**：`docs/plans/YYYY-MM-DD-<feature-name>-plan.md`
+
+让 agent 自己读取文档内容并进行审查，要求：
 - 只报告高置信度问题（置信度 ≥ 80）
 - 提供具体的修复建议
 
