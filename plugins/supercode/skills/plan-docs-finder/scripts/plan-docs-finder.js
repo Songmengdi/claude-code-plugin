@@ -3,12 +3,25 @@
 /**
  * Plan Docs Finder
  * 扫描 docs/plans 目录提取所有文档的 frontmatter 元数据
+ *
+ * 用法: node plan-docs-finder.js <plans_directory>
+ * 示例: node plan-docs-finder.js /path/to/project/docs/plans
  */
 
 const fs = require('fs');
 const path = require('path');
 
-const PLANS_DIR = 'docs/plans';
+// 获取命令行参数
+const args = process.argv.slice(2);
+
+if (args.length === 0) {
+    console.error('错误: 请指定 docs/plans 目录的绝对路径');
+    console.error('用法: node plan-docs-finder.js <plans_directory>');
+    console.error('示例: node plan-docs-finder.js /path/to/project/docs/plans');
+    process.exit(1);
+}
+
+const PLANS_DIR = path.resolve(args[0]);
 
 // 检查目录是否存在
 if (!fs.existsSync(PLANS_DIR)) {

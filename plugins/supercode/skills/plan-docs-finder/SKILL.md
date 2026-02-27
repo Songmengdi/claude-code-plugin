@@ -14,7 +14,16 @@ description: 专属 skill，扫描 docs/plans 目录提取所有文档的 frontm
 ## 执行命令
 
 ```bash
-node scripts/plan-docs-finder.js
+cd <skill_directory> && node ./scripts/plan-docs-finder.js <plans_directory>
+```
+
+**参数说明**：
+- `<skill_directory>`: plan-docs-finder skill 所在目录
+- `<plans_directory>`: 项目的 `docs/plans` 目录绝对路径
+
+**示例**：
+```bash
+cd plugins/supercode/skills/plan-docs-finder && node ./scripts/plan-docs-finder.js /absolute/path/to/project/docs/plans
 ```
 
 ## 返回格式
@@ -47,7 +56,9 @@ node scripts/plan-docs-finder.js
 
 ```javascript
 // 1. 执行脚本获取所有文档元数据
-const metadata = await executeCommand('node scripts/plan-docs-finder.js');
+const skillDir = '/path/to/plugins/supercode/skills/plan-docs-finder';
+const plansDir = '/path/to/project/docs/plans';
+const metadata = await executeCommand(`cd ${skillDir} && node ./scripts/plan-docs-finder.js ${plansDir}`);
 
 // 2. 按 type 过滤
 const designs = metadata.filter(m => m.type === 'design');
