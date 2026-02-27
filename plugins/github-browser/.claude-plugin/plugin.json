@@ -1,7 +1,7 @@
 {
   "name": "github-browser",
   "version": "0.1.0",
-  "description": "使用 agent-browser 工具在 GitHub 上访问和浏览项目代码",
+  "description": "clone在 GitHub 上的项目,并浏览项目代码",
   "author": {
     "name": "songmengdi"
   },
