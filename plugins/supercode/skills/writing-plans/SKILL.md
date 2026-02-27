@@ -86,7 +86,7 @@ digraph writing-plans {
 2. 针对此特定任务形成你认为最合适的观点
 3. 创建详细的任务分解：
 
-## 计划文档头部
+#### 计划文档头部
 
 **每个计划必须以这个头部开始：**
 
@@ -114,7 +114,7 @@ status: plan  # plan | executed | completed
 ---
 ```
 
-## 任务结构
+#### 任务结构
 
 **每个步骤是一个动作（2-5 分钟）：**
 
@@ -202,7 +202,7 @@ git commit -m "feat: add specific feature"
 
 你应该结束本次会话，开启新的会话，并复制以下命令到新的会话窗口：
 
-/execute-plan docs/plans/YYYY-MM-DD-<topic>-plan.md
+/executing-plans docs/plans/YYYY-MM-DD-<topic>-plan.md
 ```
 
 ## 关键原则
