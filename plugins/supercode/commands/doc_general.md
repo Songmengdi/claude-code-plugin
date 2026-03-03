@@ -108,7 +108,7 @@
    - 能力标签
    - 生命周期阶段
    - 关键约束
-   - 使用类 obsidian 的tag描述
+   - 使用类 obsidian 的tag描述, 且应在文档的最顶部
 ```markdown
 ---
 tags:
