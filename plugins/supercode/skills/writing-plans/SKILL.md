@@ -24,7 +24,7 @@ description: 当你有规范或多步骤任务的需求时,在接触代码之前
 1. **读取设计文档** — 理解已批准的设计
 2. **并行架构设计** — 启动 2 个 supercode:code-architect agents，提供详细实施蓝图
 3. **整合实施蓝图** — 选择最佳方案，创建详细的任务分解
-4. **并行计划审查** — 启动 3 个 supercode:code-reviewer agents，从不同维度审查计划
+4. **并行计划审查** — 启动 3 个 supercode:plan-reviewer agents，验证设计覆盖度和一致性
 5. **修复关键问题** — 修复高置信度问题
 6. **保存实施计划** — 保存到 `docs/plans/YYYY-MM-DD-<feature-name>-plan.md`
 
@@ -192,28 +192,42 @@ git commit -m "feat: add user authentication with username/password"
 
 ### 阶段 4：并行计划审查
 
-**目标：** 从不同维度审查计划质量
+**目标：** 确保计划完整覆盖设计要求，验证一致性和可执行性
 
-**并行启动 3 个 code-reviewer agents**，每个提供不同的审查重点：
-- **agent 1 (implementation feasibility)**：审查实施的可行性、完整性、可执行性
-- **agent 2 (code quality & patterns)**：审查代码质量、遵循项目约定、测试完整性
-- **agent 3 (architecture & design)**：审查架构一致性、设计模式、可维护性
+**并行启动 3 个 plan-reviewer agents**，每个提供不同的审查重点：
+- **agent 1 (design coverage)**：审查计划是否完整覆盖设计文档中的所有功能、组件和约束
+- **agent 2 (consistency & quality)**：审查计划与设计的一致性、任务划分合理性、可执行性
+- **agent 3 (completeness & gaps)**：审查是否有遗漏的功能点、缺失的边界情况、未考虑的错误处理
 
-**向每个 agent 提供计划文档路径**：`docs/plans/YYYY-MM-DD-<feature-name>-plan.md`
+**使用 Task 工具调用 plan-reviewer agent，在 prompt 中明确提供文档路径：**
 
-让 agent 自己读取文档内容并进行审查，要求：
+```
+Task({
+  subagent_type: "plan-reviewer",
+  prompt: `审查实施计划，重点：[design coverage / consistency & quality / completeness & gaps]
+
+计划文档：docs/plans/YYYY-MM-DD-<feature-name>-plan.md
+设计文档：docs/plans/YYYY-MM-DD-<feature-name>-design.md
+
+请读取这两个文档，审查计划是否完整覆盖了设计要求。只报告高置信度问题（≥80）。`
+})
+```
+
+要求 agent：
+- 从 prompt 中获取文档路径，读取文档内容
 - 只报告高置信度问题（置信度 ≥ 80）
+- 重点关注设计覆盖度、一致性和可执行性
 - 提供具体的修复建议
 
 ### 阶段 5：修复关键问题
 
-**目标：** 提高计划质量
+**目标：** 提高计划质量，确保完整覆盖设计要求
 
 **行动：**
-1. 整合所有 code-reviewer agents 的发现
-2. 识别高置信度问题
+1. 整合所有 plan-reviewer agents 的发现
+2. 识别高置信度问题（特别是设计覆盖度和一致性问题）
 3. 修复这些问题
-4. 如果发现重大问题，可能需要回到阶段 2 重新设计
+4. 如果发现重大遗漏或设计偏离，可能需要回到阶段 2 重新设计
 5. 反复审查直到没有高置信度问题
 
 ### 阶段 6：保存实施计划
