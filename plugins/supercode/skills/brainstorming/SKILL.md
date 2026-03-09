@@ -18,7 +18,7 @@ description: "You MUST use this before any creative work - creating features, bu
 你必须将以下的步骤加入到你的任务清单中并按顺序完成：
 
 0. **加载功能上下文（新会话）** — 加载现有功能的文档和历史变更
-1. **并行探索项目上下文** — 同时启动 docs-explorer agent 与 code-explorer agents
+1. **并行探索项目上下文** — 启动code-explorer agents
 2. **阅读核心文件** — 综合文档与代码 agent 识别的关键文件
 3. **提出澄清性问题** — 每次一个问题，优先多选题
 4. **并行架构探索** — 启动 2-3 个 code-architect agents
@@ -55,35 +55,32 @@ Task({
 
 **行动：**
 - 并行启动：
-  - **docs-explorer agent**    - 任务：根据用户需求，阅读 `docs/` 目录中相关文档
-    - 输出：项目规则、业务约束、不能修改的区域、关键决策、已有模式
-    - 优先阅读：`invariants.md`、`do_not_touch.md`、`first_30_minutes.md`、与需求相关的业务文档
   - **2–3 个 code-explorer agents**    - 任务：探索代码结构、实现模式、技术细节
     - 输出：核心文件列表、架构理解、代码模式
 - 两类 agent **相互独立工作**，不得假设对方的结论
 - 允许结论存在冲突或不一致，留待后续澄清阶段处理
-- **docs-explorer 的约束优先于 code-explorer 的发现**：当文档说"不能做某事"时，即使代码层面可行也必须遵守
 
-### 阶段 2：澄清性问题
-
+### 阶段 2：澄清性问题(研究决策)
+- **通过 AskUserQuestion 询问用户问题 **
 - **每次只问一个问题**
 - 尽可能优先使用多选题
 
-### 阶段 3：并行架构探索
+### 阶段 3：架构探索
 
-**目标：** 设计具有不同权衡的多种实施方案
+**目标：** 设计实施方案
 
 **行动：**
-- 并行启动 2-3 个 code-architect agents，每个专注于不同方面：
+- 询问用户使用怎样的架构 
   - **minimal changes**：最小变更，最大复用现有代码
   - **clean architecture**：可维护性、优雅抽象
   - **pragmatic balance**：速度 + 质量
-- 每个 agent 必须考虑文档约束（invariants、do_not_touch 等）
+- 启动 code-architect agents，专注于这个方面：
+- agent 必须考虑文档约束（invariants、do_not_touch 等）
 
 ### 阶段 4：呈现设计选择与批准
 
 **行动：**
-1. 基于用户选择，展示完整设计
+1. 展示完整设计
 2. 每个章节的长度与其复杂度成比例：如果简单则几句话，如果复杂则 200-300 字
 3. 涵盖：架构、组件、数据流、错误处理、测试
 4. 在每个章节后询问目前为止是否正确
