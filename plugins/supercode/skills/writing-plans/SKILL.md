@@ -22,34 +22,11 @@ description: 当你有规范或多步骤任务的需求时,在接触代码之前
 你必须将以下的步骤加入到你的任务清单中并按顺序完成：
 
 1. **读取设计文档** — 理解已批准的设计
-2. **并行架构设计** — 启动 2-3 个 supercode:code-architect agents，提供详细实施蓝图
+2. **并行架构设计** — 启动 2 个 supercode:code-architect agents，提供详细实施蓝图
 3. **整合实施蓝图** — 选择最佳方案，创建详细的任务分解
-4. **并行代码审查计划** — 启动 3 个 supercode:code-reviewer agents，从不同维度审查计划
+4. **并行计划审查** — 启动 3 个 supercode:code-reviewer agents，从不同维度审查计划
 5. **修复关键问题** — 修复高置信度问题
 6. **保存实施计划** — 保存到 `docs/plans/YYYY-MM-DD-<feature-name>-plan.md`
-7. **提供执行选项** — 1. 审查计划  2. 直接执行
-
-## 流程图
-
-```dot
-digraph writing-plans {
-    "Read approved design doc" [shape=box];
-    "Parallel architecture design with code-architect agents" [shape=box];
-    "Integrate implementation blueprint" [shape=box];
-    "Parallel code review of plan with code-reviewer agents" [shape=box];
-    "Fix critical issues" [shape=diamond];
-    "Save implementation plan" [shape=doublecircle];
-    "Provide execution options" [shape=doublecircle];
-
-    "Read approved design doc" -> "Parallel architecture design with code-architect agents";
-    "Parallel architecture design with code-architect agents" -> "Integrate implementation blueprint";
-    "Integrate implementation blueprint" -> "Parallel code review of plan with code-reviewer agents";
-    "Parallel code review of plan with code-reviewer agents" -> "Fix critical issues";
-    "Fix critical issues" -> "Save implementation plan" [label="fixed"];
-    "Fix critical issues" -> "Integrate implementation blueprint" [label="major revisions"];
-    "Save implementation plan" -> "Provide execution options";
-}
-```
 
 ## 过程
 
@@ -65,8 +42,7 @@ digraph writing-plans {
 
 **目标：** 创建详细的实施蓝图
 
-**并行启动 2-3 个 supercode:code-architect agents**，每个专注于不同方面：
-- **minimal implementation**：最小改动，最快实现
+**并行启动 2 个 supercode:code-architect agents**，每个专注于不同方面：
 - **clean implementation**：代码质量、可维护性、测试完整性
 - **pragmatic balance**：速度 + 质量的平衡
 
@@ -214,7 +190,7 @@ git commit -m "feat: add user authentication with username/password"
 
 **注意：** 对于简单的小变更，保持为单个任务；只有当变更确实独立且可分割时才拆分为多个任务。
 
-### 阶段 4：并行代码审查计划
+### 阶段 4：并行计划审查
 
 **目标：** 从不同维度审查计划质量
 
@@ -257,7 +233,7 @@ git commit -m "feat: add user authentication with username/password"
 
 你应该结束本次会话，开启新的会话，并复制以下命令到新的会话窗口：
 
-/executing-plans docs/plans/YYYY-MM-DD-<topic>-plan.md
+/supercode:executing-plans docs/plans/YYYY-MM-DD-<topic>-plan.md
 ```
 
 ## 关键原则
