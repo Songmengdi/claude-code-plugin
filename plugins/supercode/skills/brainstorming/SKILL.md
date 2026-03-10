@@ -43,7 +43,7 @@ description: "You MUST use this before any creative work - creating features, bu
 
 ## 检查清单创建
 
-你必须将以下的步骤加入到你的任务清单中并按顺序完成：
+你必须将以下的步骤通过 `TaskCreate` 加入到你的任务清单中并按顺序完成：
 
 0. **加载功能上下文（新会话）** — 加载现有功能的文档和历史变更
 1. **并行探索项目上下文** — 启动code-explorer agents
@@ -163,7 +163,7 @@ Task({
 
 **前置条件：** 用户已明确批准设计。
 
-**目标：** 为功能开发创建独立分支
+**目标：** 使用`AskUserQuestion` 询问用户,是否创建独立分支
 
 **行动：**
 1. 创建新的本地 feature 分支：
