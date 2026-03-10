@@ -21,12 +21,13 @@ description: 当你有规范或多步骤任务的需求时,在接触代码之前
 
 你必须将以下的步骤加入到你的任务清单中并按顺序完成：
 
-1. **读取设计文档并评估规模** — 理解设计，判断是小型/中型/大型
-2. **并行架构设计** — 启动 2 个 supercode:code-architect agents，提供详细实施蓝图（考虑阶段性）
-3. **整合实施蓝图** — 根据规模创建单一计划或阶段性计划
-4. **并行计划审查** — 启动 plan-reviewer agents，验证设计覆盖度、一致性和验收标准
-5. **修复关键问题** — 修复高置信度问题
-6. **保存实施计划** — 保存计划文件（及路线图和阶段性计划）
+1. **读取设计文档并评估规模** — 理解设计，判断是小型/中型/大型，**检查设计是否已分阶段**
+2. **探索现有代码库** — 识别需要修改的现有文件，理解现有代码结构
+3. **并行架构设计** — 启动 2 个 supercode:code-architect agents，提供详细实施蓝图（考虑阶段性）
+4. **整合实施蓝图** — 根据规模或设计文档的阶段划分创建单一计划或阶段性计划
+5. **并行计划审查** — 启动 plan-reviewer agents，验证设计覆盖度、一致性、文件定位准确性和测试完整性
+6. **修复关键问题** — 修复高置信度问题
+7. **保存实施计划** — 保存计划文件（及路线图和阶段性计划）
 
 ## 过程
 
@@ -37,18 +38,41 @@ description: 当你有规范或多步骤任务的需求时,在接触代码之前
 **行动：**
 - 从 `docs/plans/YYYY-MM-DD-<feature-name>-design.md` 读取设计文档
 - 理解架构、组件、数据流、约束、成功标准
-- **评估设计规模**：
-  - **小型设计**：涉及 ≤5 个核心任务，可在一个会话中完成
-  - **中型设计**：涉及 6-10 个核心任务，建议拆分为 2-3 个阶段
-  - **大型设计**：涉及 >10 个核心任务，必须拆分为多个独立阶段
+- **检查设计文档是否已经分阶段**：
+  - 如果设计文档中已经明确划分了 phases/stages，**必须**按照设计的阶段划分创建对应的阶段性计划
+  - 如果设计文档未分阶段，则根据以下标准评估规模：
+    - **小型设计**：涉及 ≤5 个核心任务，可在一个会话中完成
+    - **中型设计**：涉及 6-10 个核心任务，建议拆分为 2-3 个阶段
+    - **大型设计**：涉及 >10 个核心任务，必须拆分为多个独立阶段
+- **探索现有代码库**：
+  - 识别需要修改的现有文件
+  - 理解现有代码结构和模式
+  - 确定新文件的放置位置
 
 **规模判断标准：**
 - 功能点数量和复杂度
 - 涉及的文件和组件数量
 - 是否有明确的功能边界可以划分
 - 每个阶段是否能独立测试和验证
+- **设计文档中是否已经分阶段（优先级最高）**
 
-### 阶段 2：并行架构设计
+### 阶段 2：探索现有代码库
+
+**目标：** 理解现有代码结构，识别需要修改的文件
+
+**行动：**
+- 使用 Glob 和 Grep 工具搜索相关文件和代码
+- 识别需要修改的现有文件
+- 理解现有代码结构和模式
+- 确定新文件的放置位置
+- 记录现有代码中的关键函数、类和模块
+
+**输出：**
+- 需要修改的文件列表
+- 现有代码结构说明
+- 关键代码位置（函数、类、模块）
+
+### 阶段 3：并行架构设计
 
 **目标：** 创建详细的实施蓝图（考虑阶段性）
 
@@ -59,17 +83,22 @@ description: 当你有规范或多步骤任务的需求时,在接触代码之前
 **向每个 agent 提供设计文档路径和规模评估结果**
 
 让 agent 自己读取设计文档内容，要求：
-- **如果设计规模为中/大型**：将实施划分为 2-5 个独立阶段，每个阶段：
+- **如果设计规模为中/大型，或设计文档已分阶段**：将实施划分为 2-5 个独立阶段，每个阶段：
   - 包含 3-6 个相关任务
   - 有明确的验收标准和交付物
   - 可独立测试和验证
   - 完成后能提供增量价值
 - 基于设计文档，为每个阶段创建详细的实施蓝图
-- 指定每个要创建或修改的文件、组件职责、集成点和数据流
+- **每个任务必须明确**：
+  - 所有要创建或修改的文件（完整路径）
+  - 每个文件的修改类型（创建/修改/删除）
+  - 修改的具体位置（函数名、类名或行号范围）
+  - 实现要点：要做什么、核心思路、关键接口
+  - 测试方式：单元测试、集成测试或用户协助验证
 - 做出坚定的架构选择，而不是呈现多个选项
 - 提供具体文件路径、函数名称和步骤
 
-### 阶段 3：整合实施蓝图
+### 阶段 4：整合实施蓝图
 
 **目标：** 选择最佳方案，创建详细的任务分解
 
@@ -77,6 +106,8 @@ description: 当你有规范或多步骤任务的需求时,在接触代码之前
 1. 审查所有 code-architect agents 的实施蓝图
 2. 针对此特定任务形成你认为最合适的观点
 3. **根据设计规模创建计划**：
+   - **如果设计文档已经分阶段**：必须按照设计文档的阶段划分创建对应的阶段性计划
+   - **如果设计文档未分阶段**：根据评估的规模创建单一计划或阶段性计划
 
 #### 小型设计：创建单一计划
 
@@ -177,8 +208,10 @@ status: plan  # plan | executed | completed
 **参考设计:** docs/plans/YYYY-MM-DD-<feature-name>-design.md
 
 **验收标准:**
-- [ ] [具体的测试或验证方式]
-- [ ] [用户可验证的功能点]
+- [ ] **单元测试通过**: `[具体的测试命令]` — 预期结果
+- [ ] **集成测试通过**: `[具体的测试命令]` — 预期结果
+- [ ] **用户协助验证**: [详细验证步骤]
+- [ ] [其他具体的验证方式]
 
 ---
 ```
@@ -210,8 +243,9 @@ status: plan  # plan | executed | completed
 **参考设计:** docs/plans/YYYY-MM-DD-<feature-name>-design.md
 
 **验收标准:**
-- [ ] [具体的自动化测试命令和预期结果]
-- [ ] [用户可验证的功能点]
+- [ ] **单元测试通过**: `[具体的测试命令]` — 预期结果
+- [ ] **集成测试通过**: `[具体的测试命令]` — 预期结果
+- [ ] **用户协助验证**: [详细验证步骤]
 - [ ] [性能或质量指标]
 
 **前置条件:** [如果需要前一阶段完成，说明需要什么]
@@ -228,82 +262,110 @@ status: plan  # plan | executed | completed
 2. **原子性**：每个动作实现后代码处于可工作状态，不破坏现有功能
 3. **最小变更**：一个动作对应一个最小的功能点或前置准备，不要过度拆分
 4. **多文件支持**：一个动作可能涉及多个文件的修改
+5. **测试明确**：每个任务必须包含明确的测试方式和验证步骤
+6. **指挥棒原则**：描述要做什么、怎么做，而不是写完整代码
+
+**每个任务必须包含以下部分：**
+
+**1. 变更文件清单**（必须）
+- 列出所有需要修改的文件，使用完整路径
+- 明确每个文件的修改类型：`创建` | `修改` | `删除`
+- 对于修改的文件，说明修改位置（函数名、类名或行号范围）
+- 说明每个文件的作用和修改原因
+
+**2. 实现要点**（必须）
+- 描述要实现什么功能，而不是写完整代码
+- 提供关键的接口定义、类型声明或函数签名
+- 说明修改的核心思路和要点
+- 列出需要引入的依赖或模块
+- 对于复杂逻辑，提供伪代码或流程说明
+
+**3. 测试方式**（必须）
+- 明确测试类型：单元测试 | 集成测试 | 用户协助验证
+- 提供具体的测试命令
+- 描述验证步骤和预期结果
+- 如果需要用户协助验证，详细描述验证步骤
+
+**4. 提交信息**（必须）
+- 提供明确的 git commit 命令
+- commit message 遵循约定式提交规范
+
+**任务模板：**
 
 ````markdown
 ### 任务 N: [最小功能描述，如：添加用户认证功能]
 
 **变更文件：**
-- 创建: `src/auth/user-auth.ts`
-- 创建: `tests/auth/user-auth.test.ts`
-- 修改: `src/api/router.ts:45-52`  # 集成认证路由
+- 创建: `src/auth/user-auth.ts` — 用户认证核心逻辑
+- 创建: `tests/auth/user-auth.test.ts` — 单元测试
+- 修改: `src/api/router.ts:45-52` (函数: setupAuthRoutes) — 集成认证路由
+  - 修改原因: 添加认证端点
+  - 修改内容: 在路由配置中添加 /auth/login 端点
 
-**实现：**
+**实现要点：**
 
-类型定义 (`src/auth/user-auth.ts`):
-```typescript
-export interface UserCredentials {
-  username: string;
-  password: string;
-}
+**文件 1: src/auth/user-auth.ts** (新文件)
+- 创建用户认证模块，导出以下接口和函数：
+  - `UserCredentials` 接口：包含 username 和 password
+  - `AuthResult` 接口：包含 success、token、error 字段
+  - `authenticateUser(credentials)` 异步函数：
+    - 验证 credentials 是否为空
+    - 返回 AuthResult 对象
+    - 暂时返回 mock token，后续实现真实验证
 
-export interface AuthResult {
-  success: boolean;
-  token?: string;
-  error?: string;
-}
+**文件 2: src/api/router.ts** (修改)
+- 修改位置: 第 45-52 行，setupAuthRoutes 函数内
+- 实现要点:
+  - 导入 authenticateUser 和相关类型
+  - 添加 POST /auth/login 路由
+  - 从 request.body 获取 credentials
+  - 调用 authenticateUser 并返回结果
+
+**文件 3: tests/auth/user-auth.test.ts** (新文件)
+- 测试用例:
+  - 有效凭证返回成功和 token
+  - 空凭证返回错误信息
+- 使用 jest 测试框架
+
+**测试：**
+
+**单元测试:**
+```bash
+pnpm test tests/auth/user-auth.test.ts
+```
+预期输出: 
+```
+PASS tests/auth/user-auth.test.ts
+  authenticateUser
+    ✓ valid credentials return success
+    ✓ empty credentials return error
 ```
 
-认证函数 (`src/auth/user-auth.ts`):
-```typescript
-export async function authenticateUser(
-  credentials: UserCredentials
-): Promise<AuthResult> {
-  if (!credentials.username || !credentials.password) {
-    return { success: false, error: 'Invalid credentials' };
-  }
-  // TODO: 实际验证逻辑
-  return { success: true, token: 'mock-token' };
-}
+**集成测试:**
+```bash
+pnpm test tests/api/auth.integration.test.ts
 ```
+预期: 认证端点返回正确的 token
 
-路由集成 (`src/api/router.ts:45-52`):
-```typescript
-import { authenticateUser, UserCredentials } from '../auth/user-auth';
-
-router.post('/auth/login', async (ctx) => {
-  const credentials: UserCredentials = ctx.request.body;
-  const result = await authenticateUser(credentials);
-  ctx.body = result;
-});
-```
-
-测试 (`tests/auth/user-auth.test.ts`):
-```typescript
-import { authenticateUser } from '../../src/auth/user-auth';
-
-test('valid credentials return success', async () => {
-  const result = await authenticateUser({
-    username: 'test',
-    password: 'password'
-  });
-  expect(result.success).toBe(true);
-});
-```
-
-**验证：**
-运行: `pnpm test tests/auth/user-auth.test.ts`
-预期: PASS
+**用户协助验证:**
+1. 启动服务: `pnpm dev`
+2. 发送测试请求: `curl -X POST http://localhost:3000/auth/login -d '{"username":"test","password":"test"}'`
+3. 验证返回的 token
 
 **提交：**
 ```bash
 git add src/auth/user-auth.ts src/api/router.ts tests/auth/user-auth.test.ts
-git commit -m "feat: add user authentication with username/password"
+git commit -m "feat(auth): add user authentication with username/password
+
+- Add authenticateUser function with credential validation
+- Integrate auth endpoint to router
+- Add unit tests for authentication logic"
 ```
 ````
 
 **示例：正确的动作划分**
 
-✅ **正确的动作**（一个任务内）：
+✅ **正确的任务**（一个任务内）：
 - 添加完整的用户认证功能（类型 + 实现 + 路由集成 + 测试）
 - 重构函数签名并更新所有调用点（类型声明 + 所有调用处修改）
 - 添加缓存层并集成到现有服务（缓存实现 + 服务修改 + 测试）
@@ -317,16 +379,39 @@ git commit -m "feat: add user authentication with username/password"
 
 **注意：** 对于简单的小变更，保持为单个任务；只有当变更确实独立且可分割时才拆分为多个任务。
 
-### 阶段 4：并行计划审查
+**测试方式分类说明：**
 
-**目标：** 确保计划完整覆盖设计要求，验证一致性和可执行性
+1. **单元测试** - 自动化测试，提供具体的测试命令和预期输出
+   ```bash
+   pnpm test tests/unit/some-module.test.ts
+   ```
+
+2. **集成测试** - 测试多个组件的协作，提供测试命令
+   ```bash
+   pnpm test tests/integration/api.test.ts
+   ```
+
+3. **用户协助验证** - 需要用户手动验证的场景，必须详细描述验证步骤
+   ```markdown
+   **用户协助验证:**
+   1. 启动开发服务器: `pnpm dev`
+   2. 打开浏览器访问: http://localhost:3000
+   3. 点击登录按钮，输入用户名和密码
+   4. 验证是否成功跳转到首页
+   5. 验证是否显示用户信息
+   ```
+
+### 阶段 5：并行计划审查
+
+**目标：** 确保计划完整覆盖设计要求，验证一致性、文件定位准确性和测试完整性
 
 **小型设计：审查单一计划**
 
-**并行启动 3 个 plan-reviewer agents**，每个提供不同的审查重点：
+**并行启动 4 个 plan-reviewer agents**，每个提供不同的审查重点：
 - **agent 1 (design coverage)**：审查计划是否完整覆盖设计文档中的所有功能、组件和约束
 - **agent 2 (consistency & quality)**：审查计划与设计的一致性、任务划分合理性、可执行性
 - **agent 3 (completeness & gaps)**：审查是否有遗漏的功能点、缺失的边界情况、未考虑的错误处理
+- **agent 4 (file location & testing)**：审查文件路径是否准确、修改位置是否明确、测试方式是否完整
 
 **使用 Task 工具调用 plan-reviewer agent，在 prompt 中明确提供文档路径：**
 
@@ -350,9 +435,10 @@ Task({
 - 审查阶段之间的依赖关系是否正确
 
 **然后分阶段审查每个计划：**
-对于每个阶段计划，并行启动 2 个 plan-reviewer agents：
+对于每个阶段计划，并行启动 3 个 plan-reviewer agents：
 - **agent 1**：审查该阶段是否完整覆盖了设计中的相关部分
 - **agent 2**：审查该阶段的验收标准是否可执行、测试是否充分
+- **agent 3**：审查文件路径是否准确、修改位置是否明确、测试方式是否完整
 
 **审查提示词示例：**
 
@@ -381,18 +467,18 @@ Task({
 - 对于阶段性计划，特别关注验收标准的可执行性
 - 提供具体的修复建议
 
-### 阶段 5：修复关键问题
+### 阶段 6：修复关键问题
 
 **目标：** 提高计划质量，确保完整覆盖设计要求
 
 **行动：**
 1. 整合所有 plan-reviewer agents 的发现
-2. 识别高置信度问题（特别是设计覆盖度和一致性问题）
+2. 识别高置信度问题（特别是设计覆盖度、一致性、文件定位和测试问题）
 3. 修复这些问题
-4. 如果发现重大遗漏或设计偏离，可能需要回到阶段 2 重新设计
+4. 如果发现重大遗漏或设计偏离，可能需要回到阶段 3 重新设计
 5. 反复审查直到没有高置信度问题
 
-### 阶段 6：保存实施计划
+### 阶段 7：保存实施计划
 
 **目标：** 保存最终计划
 
@@ -448,13 +534,16 @@ Task({
 
 ## 关键原则
 
-- **阶段性优先** — 大型设计必须拆分为独立阶段，每个阶段可验证、可交付
+- **阶段性优先** — 大型设计或设计文档已分阶段的，必须拆分为独立阶段，每个阶段可验证、可交付
 - **验收标准明确** — 每个阶段必须有具体的验收标准和测试方式
 - **并行优于串行** — 使用多个 agents 并行探索不同维度
 - **完整任务分解** — 每个步骤应该是 5-15 分钟的动作
-- **精确文件路径** — 始终使用精确的文件路径
-- **完整代码** — 计划中包含完整代码（而不是"添加验证"）
+- **精确文件路径** — 每个任务必须列出所有变更文件的完整路径、修改类型和位置
+- **实现要点清晰** — 描述要做什么、核心思路和关键接口，而不是写完整代码
+- **测试明确** — 每个任务必须包含明确的测试方式：单元测试（命令）、集成测试（命令）、用户协助验证（步骤）
 - **精确命令** — 包含精确的命令和预期输出
 - **DRY, YAGNI, TDD** — 遵循核心原则
 - **频繁提交** — 鼓励频繁提交
 - **质量第一** — 通过并行审查确保计划质量
+- **代码库探索** — 在编写计划前必须探索现有代码库，理解现有结构
+- **指挥棒原则** — 计划是指挥棒，让编码变简单，而不是替代编码
