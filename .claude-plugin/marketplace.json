@@ -53,6 +53,11 @@
       "name": "supercode",
       "source": "./plugins/supercode",
       "description": "代码编写套件"
+    },
+    {
+      "name": "mcporter",
+      "source": "./plugins/mcporter",
+      "description": "指导如何安装配置mcporter工具"
     }
   ]
 }
