@@ -72,4 +72,4 @@ status: design  # design | executed | completed
 
 ## 完成条件
 
-设计文档已保存并提交，用户已知晓下一步操作。
+设计文档已保存，用户已知晓下一步操作。
