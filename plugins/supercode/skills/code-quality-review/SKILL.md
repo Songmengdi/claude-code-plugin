@@ -1,6 +1,7 @@
 ---
 name: code-quality-review
 description: 当实现完成、测试通过，但需要在合并到基础分支之前进行代码质量审查时使用
+disable-model-invocation: true
 ---
 
 # 代码质量审查

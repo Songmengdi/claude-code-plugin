@@ -1,6 +1,7 @@
 ---
 name: executing-plans
 description: 在独立会话中执行单个实施计划，通过验收测试后提交代码
+disable-model-invocation: true
 ---
 
 # 执行计划（Executing Plans）
