@@ -49,8 +49,7 @@ compatibility:
 | 4 | 编写计划文档 | `phases/phase-4.md` |
 | 5 | 计划审查 | `phases/phase-5.md` |
 | 6 | 修复关键问题 | `phases/phase-6.md` |
-| 7 | 保存实施计划 | `phases/phase-7.md` |
-| 8 | 执行交接 | `phases/phase-8.md` |
+| 7 | 执行交接 | `phases/phase-7.md` |
 
 ### 执行规则（强制）
 
