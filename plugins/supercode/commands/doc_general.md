@@ -124,9 +124,9 @@
 
 ---
 
-### 阶段 0：需求探索
+### 阶段 0：需求探索（不可跳过）
 
-通过 AskUserQuestion 与用户对话，逐步厘清需求。
+**禁止跳过本阶段。** 必须通过 AskUserQuestion 与用户充分对话，理清需求后再进入后续阶段。
 
 #### 核心目标
 
@@ -155,21 +155,13 @@
 
 ### 阶段 1：源码收集与目录初始化
 
-本阶段通过多个 Task 并行完成源码拉取。
-
-#### Task 分配
-
-| 任务类型 | Task 类型 | 输出路径 |
-|----------|-----------|----------|
-| GitHub 仓库克隆 | 独立 Task | `source/github/{repo-name}/` |
-| npm 包源码拉取 | 独立 Task | `source/npm/{package-name}/` |
-| 网络信息探索与验证 | Explore Task | `source/web/{name}.md` |
+本阶段完成源码本地化。
 
 #### 执行方式
 
-- 每个 GitHub 仓库启动一个独立 Task：`git clone --depth 1 {url} source/github/{repo-name}/`
-- 每个 npm 包启动一个独立 Task：拉取源码（非打包产物）到 `source/npm/`
-- 网络 URL 探索启动 Explore Task，交叉验证后保存到 `source/web/`
+- GitHub 仓库：直接 `git clone --depth 1 {url} source/github/{repo-name}/`
+- npm 包：直接拉取源码（非打包产物）到 `source/npm/`
+- 网络 URL 探索：启动 Explore Task，交叉验证后保存到 `source/web/`
 
 #### 本阶段输出
 
