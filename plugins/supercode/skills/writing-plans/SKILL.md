@@ -45,9 +45,9 @@ compatibility:
 |---|------|------|
 | 1 | 读取设计文档并评估规模 | `phases/phase-1.md` |
 | 2 | 探索现有代码库 | `phases/phase-2.md` |
-| 3 | 并行架构设计 | `phases/phase-3.md` |
-| 4 | 整合实施蓝图 | `phases/phase-4.md` |
-| 5 | 并行计划审查 | `phases/phase-5.md` |
+| 3 | 任务分解 | `phases/phase-3.md` |
+| 4 | 编写计划文档 | `phases/phase-4.md` |
+| 5 | 计划审查 | `phases/phase-5.md` |
 | 6 | 修复关键问题 | `phases/phase-6.md` |
 | 7 | 保存实施计划 | `phases/phase-7.md` |
 | 8 | 执行交接 | `phases/phase-8.md` |
