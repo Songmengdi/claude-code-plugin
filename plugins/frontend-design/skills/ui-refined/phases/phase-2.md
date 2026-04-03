@@ -137,38 +137,53 @@ variant2 = I(frame.id, {"type": "frame", "width": 940, "height": 540, "x": 980, 
 |------|------|----------|
 | "wrong .pen file" 间歇性报错 | 同样的 filePath 参数有时成功有时失败 | 在 `--args` 中尝试包含和省略 `filePath` 两种方式；交替重试 |
 | batch_design 部分执行 | 批量操作第一条成功后报错，产生幽灵节点 | 报错后立即调用 `get_editor_state` 检查，用 D() 清理残留节点 |
+| batch_get 大文件崩溃 | .pen 文件过大（>200KB）时 batch_get 导致 MCP 进程崩溃 | 改为直接读 .pen 文件用 Python 处理（见下方「直接读文件模式」） |
 
-## 节点查询速查
+## 节点查询
 
-实现过程中频繁需要查询节点状态。所有脚本位于 `scripts/` 目录，配合 batch_get 使用。
+实现过程中频繁需要查询节点状态。**默认直接读 .pen 文件**，不经过 `batch_get`（大文件必崩）。
 
-**重要前提**：`batch_get` 返回 `list`（不是 `{"nodes": [...]}`），且 `ids` 参数**不起过滤作用**——始终返回所有顶层节点。传任意已有 ID 即可触发返回。所有 batch_get 调用必须加 `--timeout 120000`。
+### 默认方式：直接读 .pen 文件
 
-### 两步调用模式
+`.pen` 文件就是 JSON，结构与 `batch_get` 返回值相同，用 Python 直接处理。
+
+```python
+import json
+data = json.load(open('/path/to/file.pen'))
+
+# 递归查找节点
+def find(nodes, tid):
+    for n in nodes:
+        if not isinstance(n, dict): continue
+        if n.get('id') == tid: return n
+        r = find(n.get('children', []), tid)
+        if r: return r
+    return None
+
+node = find(data.get('children', []), 'TARGET_ID')
+print(json.dumps(node, indent=2, ensure_ascii=False))
+```
+
+`scripts/` 目录下的脚本同样支持直接传入 .pen 文件路径：
 
 ```bash
-# 第一步：获取数据（固定写法，ids 传任意已有 ID）
-mcporter call pencil.batch_get --args '{"ids": ["anyId"]}' --timeout 120000 > /tmp/pencil_output.json
+python3 scripts/node_tree.py /path/to/file.pen TARGET_ID
+python3 scripts/node_props.py /path/to/file.pen ID1 ID2
+python3 scripts/node_children.py /path/to/file.pen ID
+python3 scripts/extract_tokens.py /path/to/file.pen
+python3 scripts/diff_variants.py /path/to/file.pen ID1 ID2
+```
 
-# 第二步：用脚本处理（替换 TARGET_ID）
+**注意**：直接读文件拿到的是**磁盘上的快照**，如果刚通过 `batch_design` 修改过节点，需要等 Pencil 保存后再读取才能看到最新状态。
+
+### batch_get（仅小文件可用）
+
+仅当 .pen 文件很小时才使用 `batch_get`。返回 `list`（不是 `{"nodes": [...]}`），且 `ids` 参数**不起过滤作用**——始终返回所有顶层节点。必须加 `--timeout 120000`。
+
+```bash
+mcporter call pencil.batch_get --args '{"ids": ["anyId"]}' --timeout 120000 > /tmp/pencil_output.json
 python3 scripts/node_tree.py /tmp/pencil_output.json TARGET_ID
 ```
-
-### 查看编辑器全貌（最轻量，无需 batch_get）
-
-```bash
-mcporter call pencil.get_editor_state
-```
-
-### 可用脚本
-
-| 脚本 | 用途 | 示例 |
-|------|------|------|
-| `scripts/node_tree.py` | 查看节点树结构（含子节点） | `python3 scripts/node_tree.py /tmp/pencil_output.json fkhZy` |
-| `scripts/node_props.py` | 查看节点样式属性 | `python3 scripts/node_props.py /tmp/pencil_output.json fkhZy zbmY3` |
-| `scripts/node_children.py` | 查看直接子节点 ID | `python3 scripts/node_children.py /tmp/pencil_output.json nVPnL` |
-| `scripts/extract_tokens.py` | 提取所有 $-- Design Token | `python3 scripts/extract_tokens.py /tmp/pencil_output.json` |
-| `scripts/diff_variants.py` | 对比多个组件变体属性 | `python3 scripts/diff_variants.py /tmp/pencil_output.json fkhZy zbmY3 9c1zX` |
 
 ### 查找画布空白区域
 
@@ -181,6 +196,8 @@ mcporter call pencil.find_empty_space_on_canvas --args '{"width": 1920, "height"
 - **mcporter 输出不能直接管道到 Python**，必须先 `> /tmp/pencil_output.json`
 - **大节点（50KB+）会导致 MCP 断连**，避免一次查询整个设计系统
 - **所有 batch_get 调用必须加 `--timeout 120000`**，默认 60s 超时不够
+- **查看编辑器全貌用 `get_editor_state`**（最轻量，无需 batch_get）：`mcporter call pencil.get_editor_state`
+- **查找画布空白区域**：`mcporter call pencil.find_empty_space_on_canvas --args '{"width": 1920, "height": 1080, "direction": "bottom", "padding": 200}' --timeout 120000`
 
 ## 完成条件
 
