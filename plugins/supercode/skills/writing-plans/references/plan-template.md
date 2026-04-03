@@ -152,6 +152,35 @@ status: planning  # planning | in-progress | completed
 - 提供关键的接口定义、类型声明或函数签名
 - 说明修改的核心思路和要点
 - 列出需要引入的依赖或模块
+- **参考链接**：链接到相关文档或代码片段
+- **类型定义**：直接给出类型定义或明确指出查找位置
+
+**参考链接格式**（重要）：
+```markdown
+**参考文档：**
+- 设计文档：[docs/plans/...-design.md](docs/plans/...-design.md)
+- API 文档：[path/to/api.md](path/to/api.md)
+
+**参考代码：**
+- 类似实现：[src/auth/old-auth.ts:45-60](src/auth/old-auth.ts#L45-L60)
+- 接口定义：[src/types/auth.ts:10-15](src/types/auth.ts#L10-L15)
+```
+
+**类型定义格式**（重要）：
+```markdown
+**类型定义：**
+
+**方式 1：直接给出**
+```typescript
+interface UserCredentials {
+  username: string;
+  password: string;
+}
+```
+
+**方式 2：参考现有类型**
+- 复用 [src/types/auth.ts 中的 AuthUser](src/types/auth.ts#L12)
+```
 
 **3. 测试方式**（必须）
 - 明确测试类型：单元测试 | 集成测试 | 用户协助验证
@@ -170,6 +199,33 @@ status: planning  # planning | in-progress | completed
   - 修改原因: 添加认证端点
   - 修改内容: 在路由配置中添加 /auth/login 端点
 
+**参考文档：**
+- 设计文档：[docs/plans/2026-04-02-auth-design.md](docs/plans/2026-04-02-auth-design.md)
+- 现有认证接口：[docs/api/auth.md](docs/api/auth.md)
+
+**参考代码：**
+- 类似实现：[src/auth/legacy-auth.ts:30-50](src/auth/legacy-auth.ts#L30-L50)
+- 路由配置模式：[src/api/router.ts:10-30](src/api/router.ts#L10-L30)
+
+**类型定义：**
+
+**新类型（直接给出）**
+```typescript
+interface UserCredentials {
+  username: string;
+  password: string;
+}
+
+interface AuthResult {
+  success: boolean;
+  token?: string;
+  error?: string;
+}
+```
+
+**参考现有类型**
+- 复用 [src/types/auth.ts 中的 User](src/types/auth.ts#L5) 作为用户基础类型
+
 **实现要点：**
 
 **文件 1: src/auth/user-auth.ts** (新文件)
@@ -183,6 +239,7 @@ status: planning  # planning | in-progress | completed
 
 **文件 2: src/api/router.ts** (修改)
 - 修改位置: 第 45-52 行，setupAuthRoutes 函数内
+- 参考 [src/api/router.ts:10-30](src/api/router.ts#L10-L30) 的路由注册模式
 - 实现要点:
   - 导入 authenticateUser 和相关类型
   - 添加 POST /auth/login 路由
