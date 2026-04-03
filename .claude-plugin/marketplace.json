@@ -58,6 +58,11 @@
       "name": "mcporter",
       "source": "./plugins/mcporter",
       "description": "指导如何安装配置mcporter工具"
+    },
+    {
+      "name": "frontend-design",
+      "source": "./plugins/frontend-design",
+      "description": "前端的ui设计工作过程"
     }
   ]
 }
