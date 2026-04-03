@@ -1,0 +1,1378 @@
+{
+  "version": "2.10",
+  "children": [
+    {
+      "type": "frame",
+      "id": "jE2y1",
+      "x": 540,
+      "y": 0,
+      "name": "暗黑极客风",
+      "clip": true,
+      "width": 440,
+      "height": 720,
+      "fill": "#0D1117",
+      "cornerRadius": 12,
+      "layout": "vertical",
+      "gap": 16,
+      "padding": 28,
+      "children": [
+        {
+          "type": "text",
+          "id": "7Yn4G",
+          "name": "t2",
+          "fill": "#E6EDF3",
+          "content": "暗黑极客风",
+          "fontFamily": "Geist Mono",
+          "fontSize": 22,
+          "fontWeight": "bold"
+        },
+        {
+          "type": "text",
+          "id": "zF4qR",
+          "name": "t2sub",
+          "fill": "#8B949E",
+          "content": "Dark Geek · Terminal · Neon",
+          "fontFamily": "Geist Mono",
+          "fontSize": 12,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "frame",
+          "id": "RtzsW",
+          "name": "pal2",
+          "gap": 8,
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "MGUSM",
+              "name": "pc5",
+              "width": 28,
+              "height": 28,
+              "fill": "#0D1117",
+              "cornerRadius": 14,
+              "stroke": {
+                "thickness": 1,
+                "fill": "#30363D"
+              }
+            },
+            {
+              "type": "frame",
+              "id": "ABLck",
+              "name": "pc6",
+              "width": 28,
+              "height": 28,
+              "fill": "#E6EDF3",
+              "cornerRadius": 14
+            },
+            {
+              "type": "frame",
+              "id": "dm1CA",
+              "name": "pc7",
+              "width": 28,
+              "height": 28,
+              "fill": "#00FF88",
+              "cornerRadius": 14
+            },
+            {
+              "type": "frame",
+              "id": "6v5YE",
+              "name": "pc8",
+              "width": 28,
+              "height": 28,
+              "fill": "#8B949E",
+              "cornerRadius": 14
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "peObl",
+          "name": "nav2",
+          "width": "fill_container",
+          "height": 48,
+          "fill": "#161B22",
+          "cornerRadius": 8,
+          "stroke": {
+            "thickness": 1,
+            "fill": "#30363D"
+          },
+          "padding": [
+            0,
+            16
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "D3spF",
+              "name": "logo2",
+              "fill": "#00FF88",
+              "content": "~/blog",
+              "fontFamily": "Geist Mono",
+              "fontSize": 18,
+              "fontWeight": "bold"
+            },
+            {
+              "type": "frame",
+              "id": "5zCHc",
+              "name": "nl2",
+              "gap": 20,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "xLO2Z",
+                  "name": "nlt4",
+                  "fill": "#8B949E",
+                  "content": "首页",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "vaBmy",
+                  "name": "nlt5",
+                  "fill": "#8B949E",
+                  "content": "文章",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "wZQJh",
+                  "name": "nlt6",
+                  "fill": "#8B949E",
+                  "content": "关于",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "q6sMA",
+          "name": "card3",
+          "width": "fill_container",
+          "fill": "#161B22",
+          "cornerRadius": 8,
+          "stroke": {
+            "thickness": 1,
+            "fill": "#30363D"
+          },
+          "layout": "vertical",
+          "gap": 10,
+          "padding": 20,
+          "children": [
+            {
+              "type": "text",
+              "id": "bbLk2",
+              "name": "ct3",
+              "fill": "#E6EDF3",
+              "content": "文章标题一",
+              "fontFamily": "Geist Mono",
+              "fontSize": 20,
+              "fontWeight": "bold"
+            },
+            {
+              "type": "text",
+              "id": "q74XG",
+              "name": "cs3",
+              "fill": "#8B949E",
+              "content": "这是文章摘要内容，展示文章的简要描述...",
+              "fontFamily": "Inter",
+              "fontSize": 13,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "frame",
+              "id": "qWYJF",
+              "name": "cm3",
+              "gap": 12,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "SWtp9",
+                  "name": "cd3",
+                  "fill": "#8B949E",
+                  "content": "2024-04-03",
+                  "fontFamily": "Geist Mono",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "LJfc6",
+                  "name": "ctg3",
+                  "fill": "#00FF88",
+                  "cornerRadius": 4,
+                  "padding": [
+                    4,
+                    12
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "15z9g",
+                      "name": "ctgt3",
+                      "fill": "#0D1117",
+                      "content": "技术",
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "iHMiC",
+          "name": "card4",
+          "width": "fill_container",
+          "fill": "#161B22",
+          "cornerRadius": 8,
+          "stroke": {
+            "thickness": 1,
+            "fill": "#30363D"
+          },
+          "layout": "vertical",
+          "gap": 10,
+          "padding": 20,
+          "children": [
+            {
+              "type": "text",
+              "id": "Xirfv",
+              "name": "ct4",
+              "fill": "#E6EDF3",
+              "content": "文章标题二",
+              "fontFamily": "Geist Mono",
+              "fontSize": 20,
+              "fontWeight": "bold"
+            },
+            {
+              "type": "text",
+              "id": "5curV",
+              "name": "cs4",
+              "fill": "#8B949E",
+              "content": "这是文章摘要内容，展示文章的简要描述...",
+              "fontFamily": "Inter",
+              "fontSize": 13,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "frame",
+              "id": "DdvKR",
+              "name": "cm4",
+              "gap": 12,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "8g8Wp",
+                  "name": "cd4",
+                  "fill": "#8B949E",
+                  "content": "2024-04-02",
+                  "fontFamily": "Geist Mono",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "QPJap",
+                  "name": "ctg4",
+                  "fill": "#00FF88",
+                  "cornerRadius": 4,
+                  "padding": [
+                    4,
+                    12
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "bsLo5",
+                      "name": "ctgt4",
+                      "fill": "#0D1117",
+                      "content": "生活",
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "sS1C9",
+      "x": 0,
+      "y": 920,
+      "name": "Blog PC",
+      "clip": true,
+      "width": 1920,
+      "height": 1080,
+      "fill": "#0D1117",
+      "cornerRadius": 4,
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "Awvvw",
+          "name": "Navigation",
+          "width": "fill_container",
+          "height": 64,
+          "fill": "#161B22",
+          "stroke": {
+            "thickness": 1,
+            "fill": "#30363D"
+          },
+          "padding": [
+            0,
+            32
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "F7z8Q",
+              "name": "Logo",
+              "fill": "#00FF88",
+              "content": "My Blog",
+              "fontFamily": "Geist Mono",
+              "fontSize": 20,
+              "fontWeight": "bold"
+            },
+            {
+              "type": "frame",
+              "id": "HBkva",
+              "name": "Nav Links",
+              "gap": 32,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "2poE1",
+                  "fill": "#E6EDF3",
+                  "content": "首页",
+                  "fontFamily": "Geist Mono",
+                  "fontSize": 15,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "LERfw",
+                  "fill": "#E6EDF3",
+                  "content": "文章",
+                  "fontFamily": "Geist Mono",
+                  "fontSize": 15,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "PA0Pz",
+                  "fill": "#E6EDF3",
+                  "content": "关于",
+                  "fontFamily": "Geist Mono",
+                  "fontSize": 15,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "6CWY3",
+          "name": "Body",
+          "width": "fill_container",
+          "height": "fill_container",
+          "children": [
+            {
+              "type": "frame",
+              "id": "5eafJ",
+              "name": "Main Content",
+              "clip": true,
+              "width": "fill_container",
+              "height": "fill_container",
+              "layout": "vertical",
+              "gap": 16,
+              "padding": [
+                24,
+                32
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "U6S8S",
+                  "name": "Card 1",
+                  "width": "fill_container",
+                  "fill": "#161B22",
+                  "cornerRadius": 4,
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "#30363D"
+                  },
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": 24,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "Bn8Mp",
+                      "fill": "#E6EDF3",
+                      "content": "文章标题一",
+                      "fontFamily": "Geist Mono",
+                      "fontSize": 18,
+                      "fontWeight": "bold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "qTkaX",
+                      "fill": "#8B949E",
+                      "content": "2024-04-03 · 技术",
+                      "fontFamily": "Geist Mono",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "BgNbK",
+                      "fill": "#8B949E",
+                      "content": "这是文章摘要内容，展示文章的简要描述信息，帮助读者快速了解文章主题。",
+                      "fontFamily": "Geist Mono",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "yiJhf",
+                  "name": "Card 2",
+                  "width": "fill_container",
+                  "fill": "#161B22",
+                  "cornerRadius": 4,
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "#30363D"
+                  },
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": 24,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "6iRAF",
+                      "fill": "#E6EDF3",
+                      "content": "文章标题二",
+                      "fontFamily": "Geist Mono",
+                      "fontSize": 18,
+                      "fontWeight": "bold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "dHP6r",
+                      "fill": "#8B949E",
+                      "content": "2024-04-02 · 生活",
+                      "fontFamily": "Geist Mono",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "pXuot",
+                      "fill": "#8B949E",
+                      "content": "这是文章摘要内容，展示文章的简要描述信息，帮助读者快速了解文章主题。",
+                      "fontFamily": "Geist Mono",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "H1mKN",
+                  "name": "Card 3",
+                  "width": "fill_container",
+                  "fill": "#161B22",
+                  "cornerRadius": 4,
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "#30363D"
+                  },
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": 24,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "tqedY",
+                      "fill": "#E6EDF3",
+                      "content": "文章标题三",
+                      "fontFamily": "Geist Mono",
+                      "fontSize": 18,
+                      "fontWeight": "bold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "G0p27",
+                      "fill": "#8B949E",
+                      "content": "2024-04-01 · 随笔",
+                      "fontFamily": "Geist Mono",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "QAfRU",
+                      "fill": "#8B949E",
+                      "content": "这是文章摘要内容，展示文章的简要描述信息，帮助读者快速了解文章主题。",
+                      "fontFamily": "Geist Mono",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "oGdsh",
+                  "name": "Card 4",
+                  "width": "fill_container",
+                  "fill": "#161B22",
+                  "cornerRadius": 4,
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "#30363D"
+                  },
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": 24,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "7Cjlo",
+                      "fill": "#E6EDF3",
+                      "content": "文章标题四",
+                      "fontFamily": "Geist Mono",
+                      "fontSize": 18,
+                      "fontWeight": "bold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "lc9Hj",
+                      "fill": "#8B949E",
+                      "content": "2024-03-30 · 技术",
+                      "fontFamily": "Geist Mono",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "5Lvmq",
+                      "fill": "#8B949E",
+                      "content": "这是文章摘要内容，展示文章的简要描述信息，帮助读者快速了解文章主题。",
+                      "fontFamily": "Geist Mono",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "MPOl6",
+              "name": "Sidebar",
+              "clip": true,
+              "width": 320,
+              "height": "fill_container",
+              "fill": "#161B22",
+              "stroke": {
+                "thickness": 1,
+                "fill": "#30363D"
+              },
+              "layout": "vertical",
+              "gap": 24,
+              "padding": 24,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "Sq0AP",
+                  "fill": "#00FF88",
+                  "content": "分类",
+                  "fontFamily": "Geist Mono",
+                  "fontSize": 16,
+                  "fontWeight": "bold"
+                },
+                {
+                  "type": "text",
+                  "id": "HLaGD",
+                  "fill": "#E6EDF3",
+                  "content": "技术 (12)",
+                  "fontFamily": "Geist Mono",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "Oo0dy",
+                  "fill": "#E6EDF3",
+                  "content": "生活 (8)",
+                  "fontFamily": "Geist Mono",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "yOO2Q",
+                  "fill": "#E6EDF3",
+                  "content": "随笔 (5)",
+                  "fontFamily": "Geist Mono",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "XLqof",
+                  "fill": "#00FF88",
+                  "content": "标签",
+                  "fontFamily": "Geist Mono",
+                  "fontSize": 16,
+                  "fontWeight": "bold"
+                },
+                {
+                  "type": "text",
+                  "id": "r33H4",
+                  "fill": "#8B949E",
+                  "content": "React   Vue   Node.js",
+                  "fontFamily": "Geist Mono",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "KItyA",
+                  "fill": "#8B949E",
+                  "content": "TypeScript   CSS",
+                  "fontFamily": "Geist Mono",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "9ehQR",
+                  "fill": "#00FF88",
+                  "content": "归档",
+                  "fontFamily": "Geist Mono",
+                  "fontSize": 16,
+                  "fontWeight": "bold"
+                },
+                {
+                  "type": "text",
+                  "id": "HIwNP",
+                  "fill": "#E6EDF3",
+                  "content": "2024年4月 (8)",
+                  "fontFamily": "Geist Mono",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "mgZuM",
+                  "fill": "#E6EDF3",
+                  "content": "2024年3月 (12)",
+                  "fontFamily": "Geist Mono",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "ZIRE7",
+                  "fill": "#E6EDF3",
+                  "content": "2024年2月 (6)",
+                  "fontFamily": "Geist Mono",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "cYmMF",
+      "x": 2400,
+      "y": 920,
+      "name": "Blog Phone",
+      "clip": true,
+      "width": 375,
+      "height": 812,
+      "fill": "#0D1117",
+      "cornerRadius": 4,
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "lKwO2",
+          "name": "Phone Nav",
+          "width": "fill_container",
+          "height": 56,
+          "fill": "#161B22",
+          "stroke": {
+            "thickness": 1,
+            "fill": "#30363D"
+          },
+          "padding": [
+            0,
+            20
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "cBtJD",
+              "fill": "#00FF88",
+              "content": "My Blog",
+              "fontFamily": "Geist Mono",
+              "fontSize": 18,
+              "fontWeight": "bold"
+            },
+            {
+              "type": "frame",
+              "id": "UFVzx",
+              "name": "Menu Icon",
+              "width": 24,
+              "height": 24,
+              "layout": "vertical",
+              "gap": 5,
+              "justifyContent": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "0AFFn",
+                  "name": "line1",
+                  "width": 24,
+                  "height": 2,
+                  "fill": "#E6EDF3",
+                  "cornerRadius": 1
+                },
+                {
+                  "type": "frame",
+                  "id": "oaovf",
+                  "name": "line2",
+                  "width": 24,
+                  "height": 2,
+                  "fill": "#E6EDF3",
+                  "cornerRadius": 1
+                },
+                {
+                  "type": "frame",
+                  "id": "8pPih",
+                  "name": "line3",
+                  "width": 24,
+                  "height": 2,
+                  "fill": "#E6EDF3",
+                  "cornerRadius": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "SKeD1",
+          "name": "Phone Content",
+          "clip": true,
+          "width": "fill_container",
+          "height": "fill_container",
+          "layout": "vertical",
+          "gap": 12,
+          "padding": 16,
+          "children": [
+            {
+              "type": "frame",
+              "id": "Mq3mh",
+              "name": "Phone Card 1",
+              "width": "fill_container",
+              "fill": "#161B22",
+              "cornerRadius": 4,
+              "stroke": {
+                "thickness": 1,
+                "fill": "#30363D"
+              },
+              "layout": "vertical",
+              "gap": 8,
+              "padding": 16,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "Lg1YO",
+                  "fill": "#E6EDF3",
+                  "content": "文章标题一",
+                  "fontFamily": "Geist Mono",
+                  "fontSize": 16,
+                  "fontWeight": "bold"
+                },
+                {
+                  "type": "text",
+                  "id": "1I9Uw",
+                  "fill": "#8B949E",
+                  "content": "这是文章摘要内容，展示文章的简要描述...",
+                  "fontFamily": "Geist Mono",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "T7GDb",
+                  "fill": "#8B949E",
+                  "content": "2024-04-03 · 技术",
+                  "fontFamily": "Geist Mono",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "5gGrq",
+              "name": "Phone Card 2",
+              "width": "fill_container",
+              "fill": "#161B22",
+              "cornerRadius": 4,
+              "stroke": {
+                "thickness": 1,
+                "fill": "#30363D"
+              },
+              "layout": "vertical",
+              "gap": 8,
+              "padding": 16,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "i9KVL",
+                  "fill": "#E6EDF3",
+                  "content": "文章标题二",
+                  "fontFamily": "Geist Mono",
+                  "fontSize": 16,
+                  "fontWeight": "bold"
+                },
+                {
+                  "type": "text",
+                  "id": "fnonK",
+                  "fill": "#8B949E",
+                  "content": "这是文章摘要内容，展示文章的简要描述...",
+                  "fontFamily": "Geist Mono",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "O8WfU",
+                  "fill": "#8B949E",
+                  "content": "2024-04-02 · 生活",
+                  "fontFamily": "Geist Mono",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "XTUrI",
+              "name": "Phone Card 3",
+              "width": "fill_container",
+              "fill": "#161B22",
+              "cornerRadius": 4,
+              "stroke": {
+                "thickness": 1,
+                "fill": "#30363D"
+              },
+              "layout": "vertical",
+              "gap": 8,
+              "padding": 16,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "vBBUg",
+                  "fill": "#E6EDF3",
+                  "content": "文章标题三",
+                  "fontFamily": "Geist Mono",
+                  "fontSize": 16,
+                  "fontWeight": "bold"
+                },
+                {
+                  "type": "text",
+                  "id": "iLl3J",
+                  "fill": "#8B949E",
+                  "content": "这是文章摘要内容，展示文章的简要描述...",
+                  "fontFamily": "Geist Mono",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "QJ8Y7",
+                  "fill": "#8B949E",
+                  "content": "2024-04-01 · 随笔",
+                  "fontFamily": "Geist Mono",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "aULUI",
+          "name": "Phone Footer",
+          "width": "fill_container",
+          "fill": "#161B22",
+          "stroke": {
+            "thickness": 1,
+            "fill": "#30363D"
+          },
+          "layout": "vertical",
+          "gap": 16,
+          "padding": 20,
+          "children": [
+            {
+              "type": "text",
+              "id": "rX5lj",
+              "fill": "#00FF88",
+              "content": "分类",
+              "fontFamily": "Geist Mono",
+              "fontSize": 14,
+              "fontWeight": "bold"
+            },
+            {
+              "type": "text",
+              "id": "OnrJg",
+              "fill": "#E6EDF3",
+              "content": "技术 (12)   生活 (8)   随笔 (5)",
+              "fontFamily": "Geist Mono",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "text",
+              "id": "71mdx",
+              "fill": "#00FF88",
+              "content": "标签",
+              "fontFamily": "Geist Mono",
+              "fontSize": 14,
+              "fontWeight": "bold"
+            },
+            {
+              "type": "text",
+              "id": "AEiAF",
+              "fill": "#8B949E",
+              "content": "React   Vue   Node.js",
+              "fontFamily": "Geist Mono",
+              "fontSize": 11,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "text",
+              "id": "VaC1U",
+              "fill": "#8B949E",
+              "content": "TypeScript   CSS",
+              "fontFamily": "Geist Mono",
+              "fontSize": 11,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "text",
+              "id": "P0miq",
+              "fill": "#00FF88",
+              "content": "归档",
+              "fontFamily": "Geist Mono",
+              "fontSize": 14,
+              "fontWeight": "bold"
+            },
+            {
+              "type": "text",
+              "id": "y7m86",
+              "fill": "#E6EDF3",
+              "content": "2024年4月 (8)   2024年3月 (12)",
+              "fontFamily": "Geist Mono",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "text",
+              "id": "Tw9IN",
+              "fill": "#8B949E",
+              "content": "© 2024 My Blog",
+              "fontFamily": "Geist Mono",
+              "fontSize": 10,
+              "fontWeight": "normal"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "cUWbc",
+      "x": 2020,
+      "y": 920,
+      "name": "PC说明",
+      "width": 320,
+      "fill": "#161B22",
+      "cornerRadius": 4,
+      "stroke": {
+        "thickness": 1,
+        "fill": "#30363D"
+      },
+      "layout": "vertical",
+      "gap": 16,
+      "padding": 24,
+      "children": [
+        {
+          "type": "text",
+          "id": "UDf2m",
+          "fill": "#00FF88",
+          "content": "页面说明",
+          "fontFamily": "Geist Mono",
+          "fontSize": 18,
+          "fontWeight": "bold"
+        },
+        {
+          "type": "text",
+          "id": "UPmRX",
+          "fill": "#E6EDF3",
+          "content": "尺寸: 1920 × 1080 (1080p)",
+          "fontFamily": "Geist Mono",
+          "fontSize": 13,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "text",
+          "id": "gY784",
+          "fill": "#00FF88",
+          "content": "布局行为",
+          "fontFamily": "Geist Mono",
+          "fontSize": 14,
+          "fontWeight": "bold"
+        },
+        {
+          "type": "text",
+          "id": "LDoP4",
+          "fill": "#8B949E",
+          "content": "• 导航栏吸顶固定 (64px)",
+          "fontFamily": "Geist Mono",
+          "fontSize": 12,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "text",
+          "id": "Os3qA",
+          "fill": "#8B949E",
+          "content": "• 主内容区垂直滚动，含4张文章卡片",
+          "fontFamily": "Geist Mono",
+          "fontSize": 12,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "text",
+          "id": "KfGaJ",
+          "fill": "#8B949E",
+          "content": "• 右侧边栏固定，不随内容滚动",
+          "fontFamily": "Geist Mono",
+          "fontSize": 12,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "text",
+          "id": "jk3JX",
+          "fill": "#00FF88",
+          "content": "设计风格",
+          "fontFamily": "Geist Mono",
+          "fontSize": 14,
+          "fontWeight": "bold"
+        },
+        {
+          "type": "text",
+          "id": "xgIu1",
+          "fill": "#8B949E",
+          "content": "暗黑极客风 · 终端美学 · 霓虹绿强调",
+          "fontFamily": "Geist Mono",
+          "fontSize": 12,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "text",
+          "id": "55ncD",
+          "fill": "#8B949E",
+          "content": "• 字体: Geist Mono (等宽)",
+          "fontFamily": "Geist Mono",
+          "fontSize": 12,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "text",
+          "id": "BHwFy",
+          "fill": "#8B949E",
+          "content": "• 圆角: 4px · 边框: 1px #30363D",
+          "fontFamily": "Geist Mono",
+          "fontSize": 12,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "text",
+          "id": "7t1cY",
+          "fill": "#00FF88",
+          "content": "交互说明",
+          "fontFamily": "Geist Mono",
+          "fontSize": 14,
+          "fontWeight": "bold"
+        },
+        {
+          "type": "text",
+          "id": "p402i",
+          "fill": "#8B949E",
+          "content": "• 导航链接 → 页内滚动/跳转",
+          "fontFamily": "Geist Mono",
+          "fontSize": 12,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "text",
+          "id": "7d6j0",
+          "fill": "#8B949E",
+          "content": "• 文章卡片 hover → 边框变 #00FF88",
+          "fontFamily": "Geist Mono",
+          "fontSize": 12,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "text",
+          "id": "5xzgS",
+          "fill": "#8B949E",
+          "content": "• 分类/标签点击 → 筛选文章列表",
+          "fontFamily": "Geist Mono",
+          "fontSize": 12,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "text",
+          "id": "wizR1",
+          "fill": "#8B949E",
+          "content": "• 归档点击 → 展开对应月份文章",
+          "fontFamily": "Geist Mono",
+          "fontSize": 12,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "text",
+          "id": "osaSv",
+          "fill": "#00FF88",
+          "content": "未展示状态",
+          "fontFamily": "Geist Mono",
+          "fontSize": 14,
+          "fontWeight": "bold"
+        },
+        {
+          "type": "text",
+          "id": "0j0UL",
+          "fill": "#8B949E",
+          "content": "• 空状态: 无文章时显示终端风格提示",
+          "fontFamily": "Geist Mono",
+          "fontSize": 12,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "text",
+          "id": "9qj8e",
+          "fill": "#8B949E",
+          "content": "• 加载态: 命令行风格进度条",
+          "fontFamily": "Geist Mono",
+          "fontSize": 12,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "text",
+          "id": "kg8WT",
+          "fill": "#8B949E",
+          "content": "• 搜索: 导航栏右侧搜索图标 → 弹出搜索框",
+          "fontFamily": "Geist Mono",
+          "fontSize": 12,
+          "fontWeight": "normal"
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "mea7N",
+      "x": 2875,
+      "y": 920,
+      "name": "Phone说明",
+      "width": 320,
+      "fill": "#161B22",
+      "cornerRadius": 4,
+      "stroke": {
+        "thickness": 1,
+        "fill": "#30363D"
+      },
+      "layout": "vertical",
+      "gap": 16,
+      "padding": 24,
+      "children": [
+        {
+          "type": "text",
+          "id": "g26or",
+          "fill": "#00FF88",
+          "content": "移动端说明",
+          "fontFamily": "Geist Mono",
+          "fontSize": 18,
+          "fontWeight": "bold"
+        },
+        {
+          "type": "text",
+          "id": "T5h8x",
+          "fill": "#E6EDF3",
+          "content": "尺寸: 375 × 812 (iPhone X)",
+          "fontFamily": "Geist Mono",
+          "fontSize": 13,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "text",
+          "id": "vADYy",
+          "fill": "#00FF88",
+          "content": "布局行为",
+          "fontFamily": "Geist Mono",
+          "fontSize": 14,
+          "fontWeight": "bold"
+        },
+        {
+          "type": "text",
+          "id": "QG0Ew",
+          "fill": "#8B949E",
+          "content": "• 导航栏吸顶固定 (56px)",
+          "fontFamily": "Geist Mono",
+          "fontSize": 12,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "text",
+          "id": "LEdez",
+          "fill": "#8B949E",
+          "content": "• 文章列表单列全宽显示",
+          "fontFamily": "Geist Mono",
+          "fontSize": 12,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "text",
+          "id": "hSw7I",
+          "fill": "#8B949E",
+          "content": "• 底部信息区随内容滚动，非固定",
+          "fontFamily": "Geist Mono",
+          "fontSize": 12,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "text",
+          "id": "zIpLu",
+          "fill": "#00FF88",
+          "content": "交互说明",
+          "fontFamily": "Geist Mono",
+          "fontSize": 14,
+          "fontWeight": "bold"
+        },
+        {
+          "type": "text",
+          "id": "gRuWN",
+          "fill": "#8B949E",
+          "content": "• ☰ 汉堡菜单 → 展开侧边导航抽屉",
+          "fontFamily": "Geist Mono",
+          "fontSize": 12,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "text",
+          "id": "p6g1C",
+          "fill": "#8B949E",
+          "content": "• 点击导航项 → 跳转对应页面",
+          "fontFamily": "Geist Mono",
+          "fontSize": 12,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "text",
+          "id": "BQteP",
+          "fill": "#8B949E",
+          "content": "• 卡片点击 → 进入文章详情页",
+          "fontFamily": "Geist Mono",
+          "fontSize": 12,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "text",
+          "id": "lZ6OR",
+          "fill": "#00FF88",
+          "content": "未展示状态",
+          "fontFamily": "Geist Mono",
+          "fontSize": 14,
+          "fontWeight": "bold"
+        },
+        {
+          "type": "text",
+          "id": "cmwUn",
+          "fill": "#8B949E",
+          "content": "• 空状态: 终端风格 $ no posts found",
+          "fontFamily": "Geist Mono",
+          "fontSize": 12,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "text",
+          "id": "SBB3G",
+          "fill": "#8B949E",
+          "content": "• 加载态: skeleton + 脉冲动画",
+          "fontFamily": "Geist Mono",
+          "fontSize": 12,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "text",
+          "id": "DCdCB",
+          "fill": "#8B949E",
+          "content": "• 下拉刷新: 指示器为绿色进度条",
+          "fontFamily": "Geist Mono",
+          "fontSize": 12,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "text",
+          "id": "ynqvz",
+          "fill": "#8B949E",
+          "content": "• 触控区域 ≥ 44px",
+          "fontFamily": "Geist Mono",
+          "fontSize": 12,
+          "fontWeight": "normal"
+        }
+      ]
+    }
+  ]
+}
