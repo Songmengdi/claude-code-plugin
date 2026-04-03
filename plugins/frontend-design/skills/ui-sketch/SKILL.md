@@ -32,7 +32,7 @@ description: |
 | 3 | 检查画布 | `phases/phase-3.md` |
 | 4 | 计算布局与绘制页面 | `phases/phase-4.md` |
 | 5 | 绘制说明卡片 | `phases/phase-5.md` |
-| 6 | 绘制变体行（可选） | `phases/phase-6.md` |
+| 6 | 绘制变体行 | `phases/phase-6.md` |
 | 7 | 展示初稿与迭代 | `phases/phase-7.md` |
 | 8 | 保存草图 | `phases/phase-8.md` |
 
