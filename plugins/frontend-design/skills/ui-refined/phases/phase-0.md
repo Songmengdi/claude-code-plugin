@@ -2,31 +2,22 @@
 
 ## 目标
 
-了解工具能力，读取 Excalidraw 草图结构，与用户确认设计风格。
+创建并打开 .pen 文件，了解工具能力，读取 Excalidraw 草图结构，与用户确认设计风格。
 
 ## 步骤
 
-### 0.1 认识工具
+### 0.1 创建并打开 .pen 文件（强制前置）
 
-```bash
-mcporter list pencil && mcporter list analysis-images
-```
+所有 Pencil 操作依赖 .pen 文件。必须先完成此步骤，否则后续操作必定失败。
 
-核心工具速查：
+1. 创建空文件：`echo '{"version": "2.10", "children": []}' > <项目root>/ui-design/xxx.pen`
+2. 打开文件：`mcporter call pencil.open_document --args '{"filePathOrTemplate": "绝对路径"}'`
+3. 验证编辑器状态：`mcporter call pencil.get_editor_state --args '{}'`
 
-| 工具 | 用途 |
-|------|------|
-| `batch_design` | 批量操作节点（I/C/U/R/M/D/G） |
-| `batch_get` | 获取节点详细信息 |
-| `get_editor_state` | 获取当前编辑器状态（轻量） |
-| `export_nodes` | 导出节点为图片 |
-| `open_document` | 打开 .pen 文件 |
-| `find_empty_space_on_canvas` | 查找画布空白区域 |
-
-调用格式：
-```bash
-mcporter call pencil.batch_design --args '{"operations": "..."}' --timeout 120000
-```
+验证要点：
+- `Currently active editor` 指向你刚创建的文件
+- `Document State` 显示文档为空或仅有预期的节点
+- **如果验证失败，不要继续，先排查问题**
 
 ### 0.2 读取草图
 
@@ -48,6 +39,10 @@ mcporter call excalidraw.get_resource --args '{"resource": "elements"}' \
 
 通过 AskUserQuestion 与用户头脑风暴，确定设计风格。**不要直接给预设风格表让用户选**——根据草图类型和用户回答，自行引导对话、提炼色板（背景/卡片/边框/文字/强调色/字体/圆角），确认后再进入实现。
 
+#### 多选对比
+
+风格选项**必须设置 multiSelect=true**，允许用户同时选中多个感兴趣的方向。为每个选中方向生成风格预览卡片，用户对比后最终确认一个。
+
 #### 风格预览
 
 确认风格后，创建风格预览卡片让用户最终确认：
@@ -67,4 +62,4 @@ mcporter call excalidraw.get_resource --args '{"resource": "elements"}' \
 
 ## 完成条件
 
-草图结构分析完成，设计风格已确认，**停止并等待用户回应**。
+.pen 文件已创建并验证，草图结构分析完成，设计风格已确认，**停止并等待用户回应**。
