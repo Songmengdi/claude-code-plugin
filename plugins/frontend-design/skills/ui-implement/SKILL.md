@@ -13,7 +13,14 @@ description: |
 
 ## Pencil MCP 调用方式
 
-所有 Pencil MCP 工具通过 `mcporter call` 调用，基本格式：
+查看所有可用方法：
+
+```bash
+# 应首先执行,获取pencil的使用方式
+mcporter list pencil
+```
+
+调用格式：
 
 ```bash
 mcporter call pencil.<工具名> --args '<JSON参数>' --timeout <毫秒>
