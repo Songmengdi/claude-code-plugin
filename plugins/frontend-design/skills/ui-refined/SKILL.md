@@ -7,6 +7,7 @@ description: |
   包括：读取草图、风格选择、PC/移动端实现、说明卡片、质量验证。
   关键词：精细化、UI实现、Pencil、设计稿、样式、风格、refined、design、实现布局。
   即使用户只说"把草图变成设计稿"、"实现这个页面"、"精细化UI"，也应触发此 skill。
+disable-model-invocation: true
 ---
 
 # UI 精细化设计

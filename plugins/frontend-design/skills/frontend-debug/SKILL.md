@@ -9,7 +9,7 @@ description: |
   - "前端为什么不工作"、"检查网络请求"、"帮我操作这个页面"
   - **"页面布局有问题"、"UI 显示不正确"、"帮我看看这个页面的样式"**
 
-  需要 chrome-devtools 和 analysis-images MCP 已配置。
+disable-model-invocation: true
 ---
 
 # 前端调试 Skill
