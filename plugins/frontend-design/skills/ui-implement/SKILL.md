@@ -1,9 +1,6 @@
 ---
 name: ui-implement
-description: |
-  从 Pencil 精细化设计稿（.pen 文件）中提取设计信息，用于指导前端代码实现。
-  当用户要求基于设计稿实现前端页面、组件或样式时使用此技能。
-  触发场景：用户提供 .pen 文件路径并要求实现代码时，或用户提到"根据设计稿"、"实现UI"、"从设计稿读取信息"等。
+description: 从 Pencil 精细化设计稿（.pen 文件）中提取设计信息，用于指导前端代码实现。
 disable-model-invocation: true
 ---
 
