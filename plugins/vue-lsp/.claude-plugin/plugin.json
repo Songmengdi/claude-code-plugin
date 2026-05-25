@@ -5,5 +5,17 @@
   "author": {
     "name": "Song Md"
   },
-  "keywords": ["vue", "lsp", "volar", "language-server"]
+  "keywords": ["vue", "lsp", "volar", "language-server"],
+  "lspServers": {
+    "vue": {
+      "command": "vue-language-server",
+      "args": ["--stdio"],
+      "extensionToLanguage": {
+        ".vue": "vue"
+      },
+      "startupTimeout": 180000,
+      "shutdownTimeout": 10000,
+      "restartOnCrash": false
+    }
+  }
 }
