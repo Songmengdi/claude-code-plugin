@@ -67,7 +67,17 @@
     {
       "name": "vue-lsp",
       "source": "./plugins/vue-lsp",
-      "description": "Vue SFC (.vue) 语言服务器，基于 Volar，提供代码导航、诊断、悬停提示"
+      "description": "Vue SFC (.vue) 语言服务器，基于 Volar，提供代码导航、诊断、悬停提示",
+      "lspServers": {
+        "vue": {
+          "command": "vue-language-server",
+          "args": ["--stdio"],
+          "extensionToLanguage": {
+            ".vue": "vue"
+          },
+          "startupTimeout": 180000
+        }
+      }
     }
   ]
 }
