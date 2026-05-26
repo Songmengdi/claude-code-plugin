@@ -75,8 +75,7 @@
           "extensionToLanguage": {
             ".vue": "vue"
           },
-          "startupTimeout": 180000,
-          "workspaceFolder": "fronted"
+          "startupTimeout": 180000
         }
       }
     }
