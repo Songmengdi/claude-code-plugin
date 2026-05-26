@@ -1,0 +1,7 @@
+{
+  "name": "vue-lsp",
+  "version": "0.1.0",
+  "description": "Vue SFC (.vue) 语言服务器，基于 Volar",
+  "author": { "name": "Song Md" },
+  "keywords": ["vue", "lsp", "volar"]
+}
