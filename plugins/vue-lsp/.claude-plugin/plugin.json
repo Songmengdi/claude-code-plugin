@@ -1,9 +1,0 @@
-{
-  "name": "vue-lsp",
-  "version": "0.1.0",
-  "description": "Vue SFC (.vue) 语言服务器，基于 Volar，提供代码导航、诊断、悬停提示",
-  "author": {
-    "name": "Song Md"
-  },
-  "keywords": ["vue", "lsp", "volar", "language-server"]
-}
